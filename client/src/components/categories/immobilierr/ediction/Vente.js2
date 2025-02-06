@@ -1,0 +1,628 @@
+import React, { useState, useRef, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+//import { createPost,updateVenteImmobilier } from '../../../redux/actions/postAction';
+//import {  } from '../../../redux/actions/updateCategoriesAction.js/updateImmobilier';
+import {createPost, updateVenteImmobilier } from '../../../redux/actions/postAction';
+ 
+import { imageShow, videoShow } from '../../../utils/mediaShow'
+ 
+ 
+import { GLOBALTYPES } from '../../../redux/actions/globalTypes';
+import { FormCheck } from 'react-bootstrap';
+import Select from 'react-select';
+import communesjson from "../../../json/communes.json"
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';  // Importar los estilos predeterminados
+
+const Vente = () => {
+    const { auth,    theme, socket ,statusImmobilierReducer} = useSelector((state) => state);
+   const   {vente } = statusImmobilierReducer
+     console.log(vente)
+    const dispatch = useDispatch();
+
+    const [postData, setPostData] = useState({
+        subCategory: "",
+        superficie: "",
+        etage: "",
+        piece: null,
+        promoteurimmobilier: false,
+        parlepromoteurimmobilier: false,
+        conditiondepeyement: [],
+        specifications: [],
+        papiers: [],
+        description: "",
+        
+        oferta: "Fixe",
+        change: "J'accepte l'échange",
+        wilaya: "",
+        commune: "",
+        email: "",
+        contadordevisitas: false,
+        informacion: false,
+        comentarios: false,
+        duraciondelanuncio: "nepasdesactiver",
+    });
+    
+    const conditiondepeyement = [
+        { label: 'Promesse de vente possible', value: 'Promesse de vente possible' },
+        { label: 'Crédit bancaire possible ', value: 'Crédit bancaire possible ' },
+        { label: 'Paiement par tranche possible', value: 'Paiement par tranche possible' },
+    ];
+    const specifications = [
+        { label: 'Electricité', value: 'Electricité' },
+        { label: 'Garage', value: 'Garage' },
+        { label: 'Immeuble', value: 'Immeuble' },
+        { label: 'Gaz', value: 'Gaz' },
+        { label: 'Eau', value: 'Eau' },
+    ];
+    const papiers = [
+        { label: 'Permet de construire', value: 'Permet de construire' },
+        { label: 'Decision', value: 'Decision' },
+        { label: "Act dans l'indivision", value: "Act dans l'indivision" },
+        { label: 'Act notarié', value: 'Act notarié' },
+        { label: 'Livret foncier', value: 'Livret foncier' },
+        { label: 'Papie timbre', value: 'Papie timbre' },
+    ];
+    const handleChangeSpecifications = (selectedOptions) => {
+        // Verifica si `selectedOptions` es un array
+        const selectedValues = Array.isArray(selectedOptions)
+            ? selectedOptions.map(option => option.value)  // Si es array, mapea los valores
+            : [selectedOptions.value];  // Si es un solo objeto, convierte a array
+
+        setPostData({ ...postData, specifications: selectedValues });
+    };
+    const handleChangeSelectconditiondepeyement = (selectedOptions) => {
+        // Verifica si `selectedOptions` es un array
+        const selectedValues = Array.isArray(selectedOptions)
+            ? selectedOptions.map(option => option.value)  // Si es array, mapea los valores
+            : [selectedOptions.value];  // Si es un solo objeto, convierte a array
+
+        setPostData({ ...postData, conditiondepeyement: selectedValues });
+    };
+    const handleChangeSelectpapiers = (selectedOptions) => {
+        // Verifica si `selectedOptions` es un array
+        const selectedValues = Array.isArray(selectedOptions)
+            ? selectedOptions.map(option => option.value)  // Si es array, mapea los valores
+            : [selectedOptions.value];  // Si es un solo objeto, convierte a array
+
+        setPostData({ ...postData, papiers: selectedValues });
+    };
+
+    const [images, setImages] = useState([]);
+    const [stream, setStream] = useState(false);
+    const [tracks, setTrack] = useState('')
+    const videoRef = useRef()
+    const refCanvas = useRef()
+    const [selectedWilaya, setSelectedWilaya] = useState([]);
+    const [selectedCommune, setSelectedCommune] = useState([]);
+
+    const handleWilayaChange = (event) => {
+        const selectedWilaya = event.target.value;
+        setSelectedWilaya(selectedWilaya);
+
+        const wilayaEncontrada = communesjson.find((wilaya) => wilaya.wilaya === selectedWilaya);
+        const communes = wilayaEncontrada && wilayaEncontrada.commune ? wilayaEncontrada.commune : [];
+
+        if (communes.length > 0) {
+            setSelectedCommune(communes[0]);
+        } else {
+            setSelectedCommune('');
+        }
+    };
+
+    const handleCommuneChange = (event) => {
+        setSelectedCommune(event.target.value);
+    };
+
+    const wilayasOptions = communesjson.map((wilaya, index) => (
+        <option key={index} value={wilaya.wilaya}>
+            {wilaya.wilaya}
+        </option>
+    ));
+
+    const communesOptions = communesjson.find((wilaya) => wilaya.wilaya === selectedWilaya)?.commune?.map((commune, index) => (
+        <option key={index} value={commune}>
+            {commune}
+        </option>
+    ));
+    /*
+    const handleChangeInput = (e) => {
+        const { name, value } = e.target;
+        setPostData({ ...postData, [name]: value });
+    };*/
+
+     
+
+    const handleChangeInput = (e, customValue = null) => {
+        if (customValue !== null) {
+            // Si customValue está definido, lo usamos directamente (para sliders)
+            const name = e; // El primer argumento es el nombre del campo
+            setPostData({ ...postData, [name]: customValue });
+        } else {
+            // Para eventos normales
+            const { name, value, type, checked } = e.target;
+            if (type === 'checkbox') {
+                setPostData({ ...postData, [name]: checked });
+            } else {
+                setPostData({ ...postData, [name]: value });
+            }
+        }
+    };
+    
+
+    const handleChangeImages = (e) => {
+        const files = [...e.target.files];
+        let newImages = [];
+        for (let file of files) {
+            if (!file) {
+                dispatch({
+                    type: GLOBALTYPES.ALERT,
+                    payload: { error: "File does not exist." },
+                });
+                continue;
+            }
+
+            if (file.size > 1024 * 1024 * 5) {
+                dispatch({
+                    type: GLOBALTYPES.ALERT,
+                    payload: { error: "The image size should be less than 5MB." },
+                });
+                continue;
+            }
+
+            newImages.push(file);
+        }
+        setImages([...images, ...newImages]);
+    };
+
+    const handleStream = () => {
+        navigator.mediaDevices
+            .getUserMedia({ video: true })
+            .then((mediaStream) => {
+                const video = document.getElementById("video");
+                video.srcObject = mediaStream;
+                video.play();
+                setStream(true);
+                setTrack(mediaStream.getTracks()[0]);
+            })
+            .catch((err) => {
+                dispatch({
+                    type: GLOBALTYPES.ALERT,
+                    payload: { error: "Unable to access the camera." },
+                });
+            });
+    };
+
+    const handleCapture = () => {
+        const canvas = document.createElement("canvas");
+        const video = document.getElementById("video");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+            setImages([...images, blob]);
+        });
+    };
+
+    const handleStopStream = () => {
+        if (tracks) tracks.stop();
+        setStream(false);
+    };
+    const deleteImages = (index) => {
+        const newArr = [...images]
+        newArr.splice(index, 1)
+        setImages(newArr)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        if (images.length === 0) {
+            return dispatch({ 
+                type: GLOBALTYPES.ALERT, payload: { error: "Please add your photo." }
+            });
+        }
+    
+        const postDataToSubmit = { ...postData }; // Asegúrate de copiar el estado actual
+    
+        if (vente.onEdit) {
+            dispatch(updateVenteImmobilier({ postData: postDataToSubmit, images, auth, vente }));
+        } else {
+            dispatch(createPost({ postData: postDataToSubmit, images, auth, socket }));
+        }
+    
+        setPostData({
+            subCategory: "",
+            superficie: "",
+            etage: "",
+            piece: null,
+            promoteurimmobilier: false,
+            parlepromoteurimmobilier: false,
+            conditiondepeyement: [],
+            specifications: [],
+            papiers: [],
+            description: "",
+            oferta: "Fixe",
+            change: "J'accepte l'échange",
+            wilaya: "",
+            commune: "",
+            email: "",
+            contadordevisitas: false,
+            informacion: false,
+            comentarios: false,
+            duraciondelanuncio: "nepasdesactiver",
+        });
+    
+        setImages([]);
+        if (tracks) tracks.stop();
+        dispatch({ type: GLOBALTYPES.VENTE, payload: false });
+    };
+    
+    useEffect(() => {
+        if (vente.onEdit) {
+            setPostData({
+                ...postData,
+                ...vente.postData // Combina el estado actual con los valores editados
+            });
+            setImages(vente.images || []); // Asegúrate de manejar un array vacío si no hay imágenes
+        }
+    }, [vente]);
+    
+    
+   
+    return (
+        <div className='status_modal' >
+            <form onSubmit={handleSubmit}>
+                <div className="status_header">
+                    <h5 className="m-0">Vente immobiler</h5>
+                    <span onClick={() => dispatch({
+                        type: GLOBALTYPES.VENTE, payload: false
+                    })}>
+                        &times;
+                    </span>
+                </div>
+
+                <div className="status_body">
+                    <div className="form-group">
+                        <select
+                            name="subCategory"
+                            value={postData.subCategory}
+                            onChange={handleChangeInput}
+                            className="form-control"
+                        >
+                            <option value="Sélectionner des champs  ">Sélectionner des champs  </option>
+                            <option value="Appartement">Appartement</option>
+                            <option value="Terrain">Terrain</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Local">Local</option>
+                            <option value="Carcasse">Carcasse</option>
+                            <option value="Niveau de villa">Niveau de Villa</option>
+                            <option value="Terrain Agricole">Terrain Agricole</option>
+                            <option value="Immeuble">Immeuble</option>
+                            <option value="Duplex">Duplex</option>
+                            <option value="Studio">Studio</option>
+                            <option value="Hangar">Hangar</option>
+                            <option value="Bungalow">Bungalow</option>
+                            <option value="Usine">Usine</option>
+                            <option value="Autre">Autre</option>
+
+                        </select>
+
+                    </div>
+
+                    {postData.subCategory === "Appartement" && (
+                        <>
+                            <div className="form-group">
+                                <input
+                                    type="number"
+                                    name="superficie"
+                                    value={postData.superficie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder="Superficie en M²"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="number"
+                                    name="etage"
+                                    value={postData.etage}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder="Etage(s)"
+                                />
+                            </div>
+                          
+                            <div>
+
+                                <div className="form-group">
+                                    <FormCheck
+                                        type="checkbox"
+                                        checked={postData.promoteurimmobilier}
+                                        onChange={(e) => setPostData({ ...postData, promoteurimmobilier: e.target.checked })}
+                                        label="Promotion immobilière"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <FormCheck
+                                        type="checkbox"
+                                        checked={postData.parlepromoteurimmobilier}
+                                        onChange={(e) => setPostData({ ...postData, parlepromoteurimmobilier: e.target.checked })}
+                                        label="Par le prometeur immobilier"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-danger">Spécifications</label>
+                                <div className="form-group">
+                                    <Select
+                                        placeholder="Conditions de paiement"
+                                        value={conditiondepeyement.filter(obj => postData.conditiondepeyement && postData.conditiondepeyement.includes(obj.value))}
+                                        options={conditiondepeyement}
+                                        onChange={handleChangeSelectconditiondepeyement}
+                                        isMulti={true}
+                                        closeMenuOnSelect={false}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <Select
+                                        placeholder="Spécifications"
+                                        value={specifications.filter(obj => postData.specifications && postData.specifications.includes(obj.value))}
+                                        options={specifications}
+                                        onChange={handleChangeSpecifications}
+                                        isMulti={true}
+                                        closeMenuOnSelect={false}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <Select
+                                        placeholder="paiers"
+                                        value={papiers.filter(obj => postData.papiers && postData.papiers.includes(obj.value))}
+                                        options={papiers}
+                                        onChange={handleChangeSelectpapiers}
+                                        isMulti={true}
+                                        closeMenuOnSelect={false}
+                                    />
+                                </div>
+                            </div>
+
+
+
+                        </>
+                    )}
+
+
+
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Description: </label>
+                        <textarea name="description" value={postData.description}
+                            onChange={handleChangeInput}
+                            placeholder='Description...'
+                        />
+                    </div>
+                    <div className="card-body form-group">
+    <label className="text-danger">Prix en Dinars </label>
+    <div style={{ padding: '0 20px' }}>
+        <Slider
+            min={500}
+            max={2000000}
+            step={500}
+            value={postData.price || 0} // Si no hay precio, el slider empieza en 0
+            onChange={(value) => handleChangeInput('price', value)} // Usamos customValue
+            trackStyle={{ backgroundColor: '#44EB00', height: 10 }}
+            handleStyle={{
+                borderColor: '#00AF72',
+                height: 20,
+                width: 20,
+                marginLeft: -10,
+                marginTop: -5,
+                backgroundColor: '#007bff',
+            }}
+            railStyle={{ backgroundColor: '#ccc', height: 10 }}
+        />
+    </div>
+    <div style={{ marginTop: 10 }}>
+        {postData.price ? `${postData.price} DA` : "Sin precio"} {/* Mostrar mensaje "Sin precio" */}
+    </div>
+</div>
+
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Type D'offre</label>
+                        <select
+                            multiple={false}
+                            name="oferta"
+                            value={postData.oferta}
+                            onChange={handleChangeInput}
+                            className="form-control"
+                        >
+                            <option value="Fixe">Fixe</option>
+                            <option value="Négociable">Négociable</option>
+                            <option value="Offert">Offert</option>
+
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label className="text-primary">Change</label>
+                        <select
+                            multiple={false}
+                            name="change"
+                            value={postData.change}
+                            onChange={handleChangeInput}
+                            className="form-control"
+                        >
+                            <option value="J'accepte l'échange">J'accepte l'échange</option>
+                            <option value="Pas d'échanges">Pas d'échanges </option>
+
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label className="text-primary">Wilaya:</label>
+                        <select
+                            multiple={false}
+                            className="form-control"
+                            name="wilaya"
+                            value={selectedWilaya}
+                            onChange={handleWilayaChange}
+
+                        >
+                            <option value="">Seleccionar wilaya</option>
+                            {wilayasOptions}
+                        </select>
+                        <small className='text-danger'>Ce champ est requis</small>
+                    </div>
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Commune:</label>
+                        <select
+                            multiple={false}
+                            className="form-control"
+                            name="commune"
+                            value={selectedCommune}
+                            onChange={handleCommuneChange}
+
+                        >
+                            <option value="">Seleccionar commune</option>
+                            {communesOptions}
+                        </select>
+                        <small className='text-danger'>Ce champ est requis</small>
+                    </div>
+
+
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Email</label>
+                        <input onChange={handleChangeInput} value={postData.email} name="email" type="email" className="form-control" placeholder='Email' required />
+                        <small className='text-danger'>Ce champ est requis</small>
+                    </div>
+
+
+
+                    <div>
+                        <label className="text-primary">Options générales</label>
+                        <div className="form-group">
+                            <FormCheck
+                                type="checkbox"
+                                checked={postData.contadordevisitas}
+                                onChange={(e) => setPostData({ ...postData, contadordevisitas: e.target.checked })}
+                                label="Afficher lo compteur des visites"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <FormCheck
+                                type="checkbox"
+                                checked={postData.informacion}
+                                onChange={(e) => setPostData({ ...postData, informacion: e.target.checked })}
+                                label="Autoriser les informations de contact"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <FormCheck
+                                type="checkbox"
+                                checked={postData.comentarios}
+                                onChange={(e) => setPostData({ ...postData, comentarios: e.target.checked })}
+                                label="Activer les commentaires"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-primary">Durée de l' annonces</label>
+                            <select
+                                multiple={false}
+                                onChange={handleChangeInput} value={postData.duraciondelanuncio} name="duraciondelanuncio" className="form-control" >
+
+                                <option value="nepasdesactiver">Ne pas désactiver</option>
+                                <option value="15 jour">15 Jours</option>
+                                <option value="1 mois">1 Mois</option>
+                                <option value="3 mois">3 Mois</option>
+                                <option value="6 mois">6 Mois</option>
+
+                            </select>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <div className="show_images">
+                        {
+                            images.map((img, index) => (
+                                <div key={index} id="file_img">
+                                    {
+                                        img.camera ? imageShow(img.camera, theme)
+                                            : img.url
+                                                ? <>
+                                                    {
+                                                        img.url.match(/video/i)
+                                                            ? videoShow(img.url, theme)
+                                                            : imageShow(img.url, theme)
+                                                    }
+                                                </>
+                                                : <>
+                                                    {
+                                                        img.type.match(/video/i)
+                                                            ? videoShow(URL.createObjectURL(img), theme)
+                                                            : imageShow(URL.createObjectURL(img), theme)
+                                                    }
+                                                </>
+                                    }
+                                    <span onClick={() => deleteImages(index)}>&times;</span>
+                                </div>
+                            ))
+                        }
+                    </div>
+
+                    {
+                        stream &&
+                        <div className="stream position-relative">
+                            <video autoPlay muted ref={videoRef} width="100%" height="100%"
+                                style={{ filter: theme ? 'invert(1)' : 'invert(0)' }} />
+
+                            <span onClick={handleStopStream}>&times;</span>
+                            <canvas ref={refCanvas} style={{ display: 'none' }} />
+                        </div>
+                    }
+
+                    <div className="input_images">
+                        {
+                            stream
+                                ? <i className="fas fa-camera" onClick={handleCapture} />
+                                : <>
+                                    <i className="fas fa-camera" onClick={handleStream} />
+
+                                    <div className="file_upload">
+                                        <i className="fas fa-image" />
+                                        <input type="file" name="file" id="file"
+                                            multiple accept="image/*,video/*" onChange={handleChangeImages} />
+                                    </div>
+                                </>
+                        }
+
+                    </div>
+
+
+
+                    <div className="status_footer">
+                        <button className="btn btn-secondary w-100" type="submit">
+                            Post
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    );
+};
+
+export default Vente;

@@ -1,0 +1,1854 @@
+ {(postData.subCategorySmartphone=== "Téléphones_Cellulairs") && (
+                        <div>
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >OS/Android:</label>
+                                <select
+                                    multiple={false}
+                                    name="os"
+                                    value={postData.os}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="IOS">IOS</option>
+                                    <option value="Android">Android</option>
+                                    <option value="Windows Phon">Windows Phone</option>
+                                    <option value="BlackBerry">BlackBerry</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Appareil photo:</label>
+                                <input
+                                    type="text"
+                                    name="appareil"
+                                    value={postData.appareil}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Caméra Frontale:</label>
+                                <input
+                                    type="text"
+                                    name="camerafrontal"
+                                    value={postData.camerafrontal}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Talle écran:</label>
+                                <input
+                                    type="text"
+                                    name="talleecran"
+                                    value={postData.talleecran}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Talle écran'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">RAM:</label>
+                                <select
+                                    multiple={false}
+                                    name="ram"
+                                    value={postData.ram}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="1 GO">1 GO</option>
+                                    <option value="2 GO">2 GO</option>
+                                    <option value="3 GO">3 GO</option>
+                                    <option value="4 GO">4 GO</option>
+                                    <option value="5 GO">5 GO</option>
+                                    <option value="6 GO">6 GO</option>
+                                    <option value="7 GO">7 GO</option>
+                                    <option value="8 GO">8 GO</option>
+                                    <option value="9 GO">9 GO</option>
+                                    <option value="10 GO">10 GO</option>
+                                    <option value="14 GO">14 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="512 GO">512 GO</option>
+                                    <option value="128 MO">128 MO</option>
+                                    <option value="256 MO">256 MO</option>
+                                    <option value="512 MO">512 MO</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className='text-primary'>3G/4G:</label>
+                                <select
+                                    multiple={false}
+                                    name="gigas"
+                                    value={postData.gigas}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avaic 3G">Avaic 3G</option>
+                                    <option value="Avaic 4G">Avaic 4G</option>
+
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Double puces:</label>
+                                <select
+                                    multiple={false}
+                                    name="doublepuces"
+                                    value={postData.doublepuces}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avec double puces">Avec double puces</option>
+                                    <option value="Sans double puces">Une seul puce</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    )}
+                    {(postData.subCategorySmartphone=== "Tablette") && (
+                        <div>
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >OS/Android:</label>
+                                <select
+                                    multiple={false}
+                                    name="os"
+                                    value={postData.os}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="IOS">IOS</option>
+                                    <option value="Android">Android</option>
+                                    <option value="Windows Phon">Windows Phone</option>
+                                    <option value="BlackBerry">BlackBerry</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Appareil photo:</label>
+                                <input
+                                    type="text"
+                                    name="appareil"
+                                    value={postData.appareil}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Caméra Frontale:</label>
+                                <input
+                                    type="text"
+                                    name="camerafrontal"
+                                    value={postData.camerafrontal}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Talle écran:</label>
+                                <input
+                                    type="text"
+                                    name="talleecran"
+                                    value={postData.talleecran}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Talle écran'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">RAM:</label>
+                                <select
+                                    multiple={false}
+                                    name="ram"
+                                    value={postData.ram}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="1 GO">1 GO</option>
+                                    <option value="2 GO">2 GO</option>
+                                    <option value="3 GO">3 GO</option>
+                                    <option value="4 GO">4 GO</option>
+                                    <option value="5 GO">5 GO</option>
+                                    <option value="6 GO">6 GO</option>
+                                    <option value="7 GO">7 GO</option>
+                                    <option value="8 GO">8 GO</option>
+                                    <option value="9 GO">9 GO</option>
+                                    <option value="10 GO">10 GO</option>
+                                    <option value="14 GO">14 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="512 GO">512 GO</option>
+                                    <option value="128 MO">128 MO</option>
+                                    <option value="256 MO">256 MO</option>
+                                    <option value="512 MO">512 MO</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className='text-primary'>3G/4G:</label>
+                                <select
+                                    multiple={false}
+                                    name="gigas"
+                                    value={postData.gigas}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avaic 3G">Avaic 3G</option>
+                                    <option value="Avaic 4G">Avaic 4G</option>
+
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Double puces:</label>
+                                <select
+                                    multiple={false}
+                                    name="doublepuces"
+                                    value={postData.doublepuces}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avec double puces">Avec double puces</option>
+                                    <option value="Sans double puces">Une seul puce</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    )}
+
+                    {(postData.subCategorySmartphone=== "Fixes_Fax") && (
+                        <div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select
+                                    multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+
+
+
+                        </div>
+                    )}
+                    {(postData.subCategorySmartphone=== "Téléphones_Cellulairs") && (
+                        <div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select
+                                    multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+
+
+
+                        </div>
+                    )}
+                    {(postData.subCategorySmartphone=== "Tablette") && (
+                        <div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select
+                                    multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+
+
+
+                        </div>
+                    )}
+
+                    {(postData.subCategorySmartphone=== "Smart_Watchs") && (
+                        <div>
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select
+                                    multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className='text-primary'  >OS/Android:</label>
+                                <select
+                                    multiple={false}
+                                    name="os"
+                                    value={postData.os}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="IOS">IOS</option>
+                                    <option value="Android">Android</option>
+                                    <option value="Windows Phon">Windows Phone</option>
+                                    <option value="BlackBerry">BlackBerry</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Appareil photo:</label>
+                                <input
+                                    type="text"
+                                    name="appareil"
+                                    value={postData.appareil}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Caméra Frontale:</label>
+                                <input
+                                    type="text"
+                                    name="camerafrontal"
+                                    value={postData.camerafrontal}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Talle écran:</label>
+                                <input
+                                    type="text"
+                                    name="talleecran"
+                                    value={postData.talleecran}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Talle écran'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">RAM:</label>
+                                <select
+                                    multiple={false}
+                                    name="ram"
+                                    value={postData.ram}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="1 GO">1 GO</option>
+                                    <option value="2 GO">2 GO</option>
+                                    <option value="3 GO">3 GO</option>
+                                    <option value="4 GO">4 GO</option>
+                                    <option value="5 GO">5 GO</option>
+                                    <option value="6 GO">6 GO</option>
+                                    <option value="7 GO">7 GO</option>
+                                    <option value="8 GO">8 GO</option>
+                                    <option value="9 GO">9 GO</option>
+                                    <option value="10 GO">10 GO</option>
+                                    <option value="14 GO">14 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="512 GO">512 GO</option>
+                                    <option value="128 MO">128 MO</option>
+                                    <option value="256 MO">256 MO</option>
+                                    <option value="512 MO">512 MO</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className='text-primary'>3G/4G:</label>
+                                <select
+                                    multiple={false}
+                                    name="gigas"
+                                    value={postData.gigas}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avaic 3G">Avaic 3G</option>
+                                    <option value="Avaic 4G">Avaic 4G</option>
+
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Double puces:</label>
+                                <select
+                                    multiple={false}
+                                    name="doublepuces"
+                                    value={postData.doublepuces}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avec double puces">Avec double puces</option>
+                                    <option value="Sans double puces">Une seul puce</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                    )}
+
+                    {(postData.subCategorySmartphone=== "Offres_et_Abonnements" || postData.subCategorySmartphone=== "Pizeces_de_Rechange" || postData.subCategorySmartphone=== "Ecouteurs_et_Casques" || postData.subCategorySmartphone=== "Chargeur_et_Cables") && (
+                        <div>
+                            <div className="form-group">
+                                <label className="text-primary">Titre</label>
+                                <input onChange={handleChangeInput} name="titre" placeholder='Titre' value={postData.titre} className="form-control" />
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+
+
+                        </div>
+                    )}
+
+
+
+                    {postData.subCategorySmartphone=== 'Accessoires' && (
+                        <div className="form-group">
+                            <label className="text-primary">Sous-catégories:</label>
+                            <select
+                                multiple={false}
+                                onChange={handleChangeInput}
+                                value={postData.subCategory}
+                                name="subCategory"
+                                className="form-control"
+                            >
+                                <option value="">Sous catégorie accessoires</option>
+                                <option value="Protections_d'écran">Protections d'écran</option>
+                                <option value="Coques_et_antichoc">Coques et antichoc</option>
+                                <option value="Supports">Supports</option>
+                                <option value="Selfies">Selfies</option>
+                                <option value="Stabiisateur">Stabiisateur</option>
+                                <option value="VR">VR</option>
+                                <option value="Cartes Mémoire">Cartes Mémoire</option>
+                                <option value="Autre accessoires">Autre accessoires</option>
+                            </select>
+                        </div>
+                    )}
+
+
+                    {postData.subCategorySmartphone=== "Protections_d'écran" && (
+                        <>
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder="Référence"
+                                />
+                            </div>
+
+
+
+                        </>
+                    )}
+
+                    {postData.subCategorySmartphone=== "Coques_et_antichoc" && (
+                        <>
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder="Référence"
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+
+                        </>
+                    )}
+
+                    {postData.subCategorySmartphone=== "Supports" && (
+                        <>
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder="Référence"
+                                />
+                            </div>
+
+
+
+
+                        </>
+                    )}
+
+                    {postData.subCategorySmartphone=== "Selfies" && (
+                        <>
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder="Référence"
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select
+                                    multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+
+
+
+                        </>
+                    )}
+
+                    {postData.subCategorySmartphone=== "Stabiisateur" && (
+                        <>
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Etat neuf jamais ulilsé">Etat neuf jamais ulilsé</option>
+                                    <option value="Bon Eta">Etat neuf </option>
+                                    <option value="Occasion">Bon état</option>
+                                    <option value="Reconditionné">Etat moyen</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select
+                                    multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className='text-primary'  >OS/Android:</label>
+                                <select
+                                    multiple={false}
+                                    name="os"
+                                    value={postData.os}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="IOS">IOS</option>
+                                    <option value="Android">Android</option>
+                                    <option value="Windows Phon">Windows Phone</option>
+                                    <option value="BlackBerry">BlackBerry</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Appareil photo:</label>
+                                <input
+                                    type="text"
+                                    name="appareil"
+                                    value={postData.appareil}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Caméra Frontale:</label>
+                                <input
+                                    type="text"
+                                    name="camerafrontal"
+                                    value={postData.camerafrontal}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Talle écran:</label>
+                                <input
+                                    type="text"
+                                    name="talleecran"
+                                    value={postData.talleecran}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Talle écran'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">RAM:</label>
+                                <select
+                                    multiple={false}
+                                    name="ram"
+                                    value={postData.ram}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="1 GO">1 GO</option>
+                                    <option value="2 GO">2 GO</option>
+                                    <option value="3 GO">3 GO</option>
+                                    <option value="4 GO">4 GO</option>
+                                    <option value="5 GO">5 GO</option>
+                                    <option value="6 GO">6 GO</option>
+                                    <option value="7 GO">7 GO</option>
+                                    <option value="8 GO">8 GO</option>
+                                    <option value="9 GO">9 GO</option>
+                                    <option value="10 GO">10 GO</option>
+                                    <option value="14 GO">14 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="512 GO">512 GO</option>
+                                    <option value="128 MO">128 MO</option>
+                                    <option value="256 MO">256 MO</option>
+                                    <option value="512 MO">512 MO</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className='text-primary'>3G/4G:</label>
+                                <select
+                                    multiple={false}
+                                    name="gigas"
+                                    value={postData.gigas}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avaic 3G">Avaic 3G</option>
+                                    <option value="Avaic 4G">Avaic 4G</option>
+
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Double puces:</label>
+                                <select
+                                    multiple={false}
+                                    name="doublepuces"
+                                    value={postData.doublepuces}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avec double puces">Avec double puces</option>
+                                    <option value="Sans double puces">Une seul puce</option>
+                                </select>
+                            </div>
+
+
+                        </>
+                    )}
+
+                    {postData.subCategorySmartphone=== "VR" && (
+                        <>
+
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+
+
+
+                        </>
+                    )}
+
+                    {(postData.subCategorySmartphone=== "Power_banks") && (
+
+                        <div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="Marca"
+                                    value={selectedMarca}
+                                    onChange={handleMarcaChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner la Marque</option>
+                                    {marcasOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Modèle:</label>
+                                <select
+                                    multiple={false}
+                                    className="form-control"
+                                    name="modelo"
+                                    value={selectedModelo}
+                                    onChange={handleModeloChange}
+                                    required
+                                >
+                                    <option value="">Seleccioner le Modèle</option>
+                                    {modelosOptions}
+                                </select>
+                                <small className='text-danger'>Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Copie:</label>
+                                <select
+                                    multiple={false}
+                                    name="copie"
+                                    value={postData.copie}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Original">Original</option>
+                                    <option value="Reconditionné">Reconditionné</option>
+                                    <option value="Copie Chinois">Copie Chinois</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Mémoire:</label>
+                                <select
+                                    multiple={false}
+                                    name="memoire"
+                                    value={postData.memoire}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="128 GO">128 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className="text-primary">Couleurs:</label>
+                                <select
+                                    multiple={false}
+                                    name="color"
+                                    value={postData.color}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Blanc">Blanc</option>
+                                    <option value="Noir">Noir</option>
+                                    <option value="Doré">Doré</option>
+                                    <option value="Argenté">Argenté</option>
+                                    <option value="Bleu">Bleu</option>
+                                    <option value="Rouge">Rouge</option>
+                                    <option value="Vert">Vert</option>
+                                    <option value="Rose">Rose</option>
+                                    <option value="Gris">Gris</option>
+                                    <option value="Jaune">Jaune</option>
+                                    <option value="Violet">Violet</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >OS/Android:</label>
+                                <select
+                                    multiple={false}
+                                    name="os"
+                                    value={postData.os}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="IOS">IOS</option>
+                                    <option value="Android">Android</option>
+                                    <option value="Windows Phon">Windows Phone</option>
+                                    <option value="BlackBerry">BlackBerry</option>
+                                </select>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Appareil photo:</label>
+                                <input
+                                    type="text"
+                                    name="appareil"
+                                    value={postData.appareil}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Caméra Frontale:</label>
+                                <input
+                                    type="text"
+                                    name="camerafrontal"
+                                    value={postData.camerafrontal}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='En Mégapixel'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Talle écran:</label>
+                                <input
+                                    type="text"
+                                    name="talleecran"
+                                    value={postData.talleecran}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Talle écran'
+
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">RAM:</label>
+                                <select
+                                    multiple={false}
+                                    name="ram"
+                                    value={postData.ram}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="1 GO">1 GO</option>
+                                    <option value="2 GO">2 GO</option>
+                                    <option value="3 GO">3 GO</option>
+                                    <option value="4 GO">4 GO</option>
+                                    <option value="5 GO">5 GO</option>
+                                    <option value="6 GO">6 GO</option>
+                                    <option value="7 GO">7 GO</option>
+                                    <option value="8 GO">8 GO</option>
+                                    <option value="9 GO">9 GO</option>
+                                    <option value="10 GO">10 GO</option>
+                                    <option value="14 GO">14 GO</option>
+                                    <option value="16 GO">16 GO</option>
+                                    <option value="32 GO">32 GO</option>
+                                    <option value="64 GO">64 GO</option>
+                                    <option value="256 GO">256 GO</option>
+                                    <option value="512 GO">512 GO</option>
+                                    <option value="128 MO">128 MO</option>
+                                    <option value="256 MO">256 MO</option>
+                                    <option value="512 MO">512 MO</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className='text-primary'>3G/4G:</label>
+                                <select
+                                    multiple={false}
+                                    name="gigas"
+                                    value={postData.gigas}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avaic 3G">Avaic 3G</option>
+                                    <option value="Avaic 4G">Avaic 4G</option>
+
+                                </select>
+                            </div>
+
+
+
+                            <div className="form-group">
+                                <label className='text-primary'  >Double puces:</label>
+                                <select
+                                    multiple={false}
+                                    name="doublepuces"
+                                    value={postData.doublepuces}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                >
+                                    <option value="Avec double puces">Avec double puces</option>
+                                    <option value="Sans double puces">Une seul puce</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    )}
+
+                    {(postData.subCategorySmartphone=== "Baffle") && (
+                        <div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <input
+                                    type="text"
+                                    name="titledemarque"
+                                    value={postData.titledemarque}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Marque'
+
+                                />
+                            </div>
+
+
+
+
+                        </div>
+                    )}
+
+
+                    {(postData.subCategorySmartphone=== "Chargeur_et_Cables") && (
+                        <div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="text-primary">Marque:</label>
+                                <input
+                                    type="text"
+                                    name="titledemarque"
+                                    value={postData.titledemarque}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Marque'
+
+                                />
+                            </div>
+
+
+
+
+                        </div>
+                    )}
+
+                    {(postData.subCategorySmartphone=== "Autre") && (
+                        <div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Titre:</label>
+                                <input
+                                    onChange={handleChangeInput}
+                                    name="titre"
+                                    placeholder="Titre"
+                                    value={postData.titre}
+                                    className="form-control"
+                                />
+                                <small className="text-danger">Ce champ est requis</small>
+                            </div>
+
+                            <div className="form-group">
+                                <label className="text-primary">Référence:</label>
+                                <input
+                                    type="text"
+                                    name="referencia"
+                                    value={postData.referencia}
+                                    onChange={handleChangeInput}
+                                    className="form-control"
+                                    placeholder='Référence'
+
+                                />
+                            </div>
+
+
+
+
+                        </div>
+                    )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Etat:</label>
+                        <select
+                            multiple={false}
+                            name="etattelefono"
+                            value={postData.etattelefono}
+                            onChange={handleChangeInput}
+                            className="form-control"
+                        >
+                            <option value="Etat neuf jamais ulilsé">Etat neuf jamais ulilsé</option>
+                            <option value="Bon Eta">Etat neuf </option>
+                            <option value="Occasion">Bon état</option>
+                            <option value="Reconditionné">Etat moyen</option>
+                        </select>
+                    </div>
+
+

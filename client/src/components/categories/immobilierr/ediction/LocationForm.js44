@@ -1,0 +1,206 @@
+import React, { useState, useRef, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { Link } from 'react-router-dom'
+import { createPost, updatePost } from '../../../redux/actions/postAction';
+
+import { imageShow, videoShow } from '../../../utils/mediaShow'
+
+import 'rc-slider/assets/index.css';  // Importar los estilos predeterminados
+
+import { GLOBALTYPES } from '../../../redux/actions/globalTypes';
+
+const LocationForm = () => {
+  const { auth, theme, socket, status } = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  const [postData, setPostData] = useState({
+    category: '',
+    subCategory: '',
+    Appartement: '',
+    detailsAppartement: '',
+    Superficie: '',
+    Etage: '',
+    Piece: '',
+    content: '',
+    title: '',
+    modelos: [],
+  });
+
+  const [images, setImages] = useState([])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+
+    if (images.length === 0)
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Please add your photo." },
+      });
+
+    if (status.onEdit) {
+      dispatch(updatePost({ postData, images, auth, status }))
+    } else {
+      dispatch(createPost({ postData, images, auth, socket }))
+    }
+    //category, subCategory, Appartement, detailsAppartement, content, title, modelos, Superficie,Etage, Piece,
+      setPostData({
+        category: '',
+        subCategory: '',
+        Appartement: '',
+        detailsAppartement: '',
+        Superficie: '',
+        Etage: '',
+        Piece: '',
+        content: '',
+        title: '',
+        modelos: [],
+
+      });
+    setImages([]);
+
+  };
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setPostData({ ...postData, [name]: value });
+  };
+  useEffect(() => {
+    if (status.category.onEdit) {
+      setPostData(status.postData)
+      setImages(status.images)
+    }
+  }, [status])
+  return (
+    <div className='status_modal' >
+      <form onSubmit={handleSubmit}>
+        <div className="status_header">
+          <h5 className="m-0">Categoriess</h5>
+          <span onClick={() => dispatch({
+            type: GLOBALTYPES.STATUS, payload: false
+          })}>
+            &times;
+          </span>
+        </div>
+
+        <div className="status_body">
+
+
+          <div className='form-group'>
+            <select
+              name="category"
+              value={postData.category}
+              onChange={handleChangeInput}
+              className="form-control"  >
+              <option value="Vente">Vente</option>
+              <option value="Location">Location</option>
+              <option value="Villa">Villa</option>
+              <option value="Local">Location Vacances</option>
+              <option value="Echange">Echange</option>
+              <option value="Cherche-Location">Cherche Location</option>
+              <option value="Cherche Achat">Cherche Achat</option>
+            </select>
+          </div>
+
+          {postData.category === "Vente" && (
+            <div className="form-group">
+              <select
+                name="subCategory"
+                value={postData.subCategory}
+                onChange={handleChangeInput}
+                className="form-control"
+              >
+                <option value="">Seleccione una subcategoría</option>
+                <option value="Appartement">Appartement</option>
+                <option value="Terrain">Terrain</option>
+                <option value="Villa">Villa</option>
+              </select>
+            </div>
+          )}
+
+          {postData.category === "Location" && (
+            <div className="form-group">
+              <select
+                name="subCategory"
+                value={postData.subCategory}
+                onChange={handleChangeInput}
+                className="form-control"
+              >
+                <option value="">Seleccione una subcategoría</option>
+                <option value="Appartement">Appartement</option>
+                <option value="Terrain">Terrain</option>
+                <option value="Villa">Villa</option>
+              </select>
+            </div>
+          )}
+
+
+
+
+          {postData.subCategory === "Appartement" && (
+            <div className="form-group">
+              <select
+                name="detailsAppartement"
+                value={postData.detailsAppartement}
+                onChange={handleChangeInput}
+                className="form-control"
+              >
+                <option value="">Seleccione un detalle</option>
+                <option value="Superficie">Superficie</option>
+                <option value="Etage">Etage</option>
+                <option value="Piece">Piece</option>
+              </select>
+            </div>
+          )}
+
+          <textarea
+            name="content"
+            value={postData.content}
+            placeholder={`${auth.user.username}, what are you thinking?`}
+            onChange={handleChangeInput}
+            style={{
+              filter: theme ? 'invert(1)' : 'invert(0)',
+              color: theme ? 'white' : '#111',
+              background: theme ? 'rgba(0,0,0,.03)' : '',
+            }}
+          />
+
+          <input
+            type="text"
+            name="title"
+            value={postData.title}
+            placeholder="Enter a title"
+            onChange={handleChangeInput}
+          />
+
+
+          <input
+            type="text"
+            name="modelos"
+            value={postData.modelos}
+            placeholder="Enter models (comma-separated)"
+            onChange={(e) => setPostData({
+              ...postData,
+              modelos: e.target.value.split(',')
+            })}
+          />
+
+
+
+
+          <div className="status_footer">
+            <button className="btn btn-secondary w-100" type="submit">
+              Post
+            </button>
+          </div>
+        </div>
+      </form >
+    </div >
+  )
+}
+
+
+
+
+export default LocationForm

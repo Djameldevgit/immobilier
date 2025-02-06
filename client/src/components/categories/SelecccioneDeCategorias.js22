@@ -1,0 +1,57 @@
+import React from 'react';
+import { GLOBALTYPES } from '../../redux/actions/globalTypes';
+import { useDispatch } from 'react-redux';
+const SeleccionDeCategorias = ({ onCategorySelect }) => {
+    const dispatch = useDispatch()
+    const handleCategoryChange = (event) => {
+        onCategorySelect(event.target.value); // Actualiza la categoría seleccionada
+    };
+
+    return (
+        <div className="status_modal">
+        <form  >
+            <div className="status_header">
+                <h5 className="m-0">Categoriess=</h5>
+                <span onClick={() => dispatch({
+                    type: GLOBALTYPES.STATUS, payload: false
+                })}>
+                    &times;
+                </span>
+            </div>
+
+            <div className="form-group">
+            <select  className='form-control'  onChange={handleCategoryChange}>
+                <option value="">--Selecciona una opción--</option>
+                <option value="Immobilier">Inmobiliaria</option>
+                <option value="AutomobilesVehicules">Automóviles y Vehículos</option>
+                <option value="Piece détachée">Piece détachée</option>
+                <option value="TelephoneAccesoire">Téléphone & Accessoire</option>
+                <option value="Informatique">Informatique</option>
+                <option value="Electroménager & Électronique">Electroménager & Électronique</option>
+                <option value="Vêtement & Mode">Vêtement et Mode</option>
+                <option value="Sante & Beauté">Sante & Beauté</option>
+                <option value="Meuble & Maisone">Meuble & Maison</option>
+                <option value="Loisir & Divertissement">Loisir & Divertissement</option>
+                <option value="Offre & demande d'emploi">Offre & demande d'emploi</option>
+                <option value="Sport">Sport </option>
+                <option value=" Matériaux & equipement"> Matériaux & equipement</option>
+                <option value="Alimentation">Alimentation</option>
+                <option value="Servicess">Services</option>
+                <option value="Voyages">Voyages</option>
+              
+            </select>
+ 
+                
+            </div>
+
+            
+
+        </form>
+    </div>
+
+
+       
+    );
+};
+
+export default SeleccionDeCategorias

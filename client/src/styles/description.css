@@ -1,0 +1,44 @@
+.description {
+     
+    padding: 20px;
+}
+
+.description .body1 {
+    background-color: rgb(207, 200, 216);
+}
+
+.description .body1 {
+    background-color: rgb(207, 200, 216);
+}
+.cardheaderpost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+}
+.description-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.description-header .category {
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 11px;
+}
+
+.description-header .subcategory {
+    font-weight: bold;
+     font-size: 15px;
+     margin-right: 11px;
+}
+
+.description-header .title {
+
+    font-size: 20px;
+    margin-right: 14px;
+}

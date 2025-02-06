@@ -1,0 +1,95 @@
+import React from 'react';
+
+const Description = ({ post }) => {
+  const Field = ({ label, value }) => (
+    <div className="form-group">
+      <label><strong>{label}:</strong></label>
+      <p>{value}</p>
+    </div>
+  );
+
+  return (
+    <div className="post-details">
+      <h2>Detalles del Post</h2>
+
+      <div className="form-groupp">
+        <label ><strong>Titre:</strong></label>
+        <p className='text-danger'> <strong>{post.content}</strong>  </p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Dirección:</strong></label>
+        <p>{post.direccion}</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Wilaya:</strong></label>
+        <p>{post.wilaya}</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Commune:</strong></label>
+        <p>{post.commune}</p>
+      </div>
+
+      <div>
+        {post.content !== "servicio" && (
+          <div className="form-groupp">
+            <label><strong>Especificaciones:</strong></label>
+            <ul className="specificationsList">
+              {post.specifications && Array.isArray(post.specifications) && post.specifications.length > 0 ? (
+                post.specifications.map((spec, index) => (
+                  <li key={index}>{spec}</li>
+                ))
+              ) : (
+                <li>No hay especificaciones adicionales</li>
+              )}
+            </ul>
+          </div>
+        )}
+
+        {post.content === "servicio" && (
+          <Field label="Service" value={post.optionservice || 'No especificado'} />
+        )}
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Descripción:</strong></label>
+        <p>{post.discripcion}</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Precio en Dinars:</strong></label>
+        <p>{post.pricesala} Dinars</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>¿Es negociable?</strong></label>
+        <p>{post.negociable === 'si' ? 'Sí' : 'No'}</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Nombre y apellido:</strong></label>
+        <p>{post.nomprenom}</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Teléfono:</strong></label>
+        <p>{post.telefono}</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Email:</strong></label>
+        <p>{post.email}</p>
+      </div>
+
+      <div className="form-groupp">
+        <label><strong>Sitio web:</strong></label>
+        <p>{post.web}</p>
+      </div>
+ 
+    </div>
+  );
+};
+
+export default Description;

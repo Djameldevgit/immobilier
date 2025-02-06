@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { GLOBALTYPES } from '../../../redux/actions/globalTypes';
+
+const CardHeader = ({ post }) => {
+    const { auth } = useSelector(state => state);
+    const dispatch = useDispatch();
+
+    // Estado para controlar si estamos en modo edición
+    const [isEditing, setIsEditing] = useState(false);
+
+    // Tipo actual basado en la subcategoría del post
+    const currentType = post.subCategoryVente ? GLOBALTYPES.VENTE : 
+                        post.subCategoryLocation ? GLOBALTYPES.LOCATION : 
+                        post.content ? GLOBALTYPES.TELEFONO : 
+                        GLOBALTYPES.VENTE;
+
+    // Manejar la edición del post
+    const handleEditPost = () => {
+        dispatch({ type: currentType, payload: { ...post, onEdit: true } });
+        setIsEditing(true); // Muestra el formulario de edición
+    };
+
+    // Función para cancelar la edición
+    const handleCancelEdit = () => {
+        setIsEditing(false); // Cierra el formulario de edición
+    };
+
+    return (
+        <div className="card-header post-card-header2">
+            <div className="nav-item">
+                <span
+                    className="material-icons dropdown-icon"
+                    id="moreLink"
+                    data-toggle="dropdown"
+                >
+                    more_horiz
+                </span>
+
+                <div className="dropdown-menu dropdown-menu-right">
+                    {auth.user._id === post.user._id ? (
+                        <>
+                            {/* Mostrar el formulario de edición si isEditing es true */}
+                            {isEditing ? (
+                                <div>
+                                    <form>
+                                        <label>Edit your post</label>
+                                        {/* Aquí el formulario de edición */}
+                                        <input type="text" defaultValue={post.title} />
+                                        
+                                        {/* Botones de Editar y Cancelar dentro del mismo formulario */}
+                                        <div className="form-buttons">
+                                         
+                                            <button type="button" onClick={handleCancelEdit}>Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            ) : (
+                                // Si no está editando, mostrar el botón de "Update"
+                                <div className="dropdown-item" onClick={handleEditPost}>
+                                    <span className="material-icons">update_outline</span>
+                                    Update {currentType === GLOBALTYPES.VENTE ? "Vente" : "Location"}
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className="dropdown-item">
+                            <span className="material-icons">flag</span> Denunciar
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default CardHeader;

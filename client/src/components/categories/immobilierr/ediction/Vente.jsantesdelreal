@@ -1,0 +1,565 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { createPost, updatePost } from '../../../redux/actions/postAction';
+import { imageShow, videoShow } from '../../../utils/mediaShow';
+
+import { GLOBALTYPES } from '../../../redux/actions/globalTypes';
+import { FormCheck } from 'react-bootstrap';
+import Select from 'react-select';
+import communesjson from "../../../json/communes.json"
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';  // Importar los estilos predeterminados
+
+
+
+
+const Vente = () => {
+    const { auth, theme, socket, statusImmobilierReducer } = useSelector((state) => state);
+    const { vente } = statusImmobilierReducer
+    const dispatch = useDispatch();
+
+    // Un estado combinado para subCategory y vente
+    const [postData, setPostData] = useState({
+        subCategory: "",          // Categoría principal (vente, location, echange)
+        papiersOption: "",        // Subcategoría (villa, appartement)
+        appartementOption: "",    // Opciones específicas para Appartement
+        appartementsuboption: "", // Oferta/Change para Appartement
+        superficie: "",
+        piece: "",                // Campo para echange
+        etage: "",                // Campo para echange
+        change: "",               // Opciones específicas para Change
+        oferta: "",               // Opciones específicas para Oferta
+        promoteurimmobilier: false,
+        parlepromoteurimmobilier: false,
+        conditiondepeyement: [],
+        specifications: [],
+        papiers: [],          // Array para almacenar imágenes cargadas
+
+        description: '',
+        price: '',
+        oferta: '',
+        change: '',
+        commune: '',
+        wilaya: '',
+        email: '',
+        contadordevisitas: '',
+        informacion: '',
+        comentarios: '',
+        duraciondelanuncio: '',
+
+
+    });
+
+
+
+    const [images, setImages] = useState([]);
+
+    const [stream, setStream] = useState(false);
+    const videoRef = useRef();
+    const refCanvas = useRef();
+    const [tracks, setTracks] = useState('');
+
+    const handleChangeImages = e => {
+        const files = [...e.target.files];
+        let err = '';
+        let newImages = [];
+
+        files.forEach(file => {
+            if (!file) return (err = 'File does not exist.');
+
+            if (file.size > 1024 * 1024 * 5) {
+                return (err = 'The image/video largest is 5mb.');
+            }
+
+            return newImages.push(file);
+        });
+
+        if (err) dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err } });
+        setImages([...images, ...newImages]);
+    };
+
+    const deleteImages = index => {
+        const newArr = [...images];
+        newArr.splice(index, 1);
+        setImages(newArr);
+    };
+
+    const handleStream = () => {
+        setStream(true);
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices
+                .getUserMedia({ video: true })
+                .then(mediaStream => {
+                    videoRef.current.srcObject = mediaStream;
+                    videoRef.current.play();
+
+                    const track = mediaStream.getTracks();
+                    setTracks(track[0]);
+                })
+                .catch(err => console.log(err));
+        }
+    };
+
+    const handleCapture = () => {
+        const width = videoRef.current.clientWidth;
+        const height = videoRef.current.clientHeight;
+
+        refCanvas.current.setAttribute('width', width);
+        refCanvas.current.setAttribute('height', height);
+
+        const ctx = refCanvas.current.getContext('2d');
+        ctx.drawImage(videoRef.current, 0, 0, width, height);
+        let URL = refCanvas.current.toDataURL();
+        setImages([...images, { camera: URL }]);
+    };
+
+    const handleStopStream = () => {
+        tracks.stop();
+        setStream(false);
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        if (images.length === 0)
+            return dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: { error: 'Please add your photo.' },
+            });
+
+        if (vente.onEdit) {
+            dispatch(updatePost({ postData, images, auth, vente }));
+        } else {
+            dispatch(createPost({ postData, images, auth, socket }));
+        }
+
+        setPostData(postData);
+        setImages([]);
+        if (tracks) tracks.stop();
+        dispatch({ type: GLOBALTYPES.VENTE, payload: false });
+    };
+
+    useEffect(() => {
+        if (vente.onEdit) {
+            console.log("Datos de edición:", vente);
+            setPostData({
+                subCategory: vente.subCategory || "",
+                papiersOption: vente.papiersOption || "",
+                appartementOption: vente.appartementOption || "",
+                appartementsuboption: vente.appartementsuboption || "",
+                superficie: vente.superficie || "",
+                piece: vente.piece || "",
+                etage: vente.etage || "",
+                change: vente.change || "",
+                oferta: vente.oferta || "",
+                promoteurimmobilier: vente.promoteurimmobilier || "",
+                parlepromoteurimmobilier: vente.parlepromoteurimmobilier || "",
+                description: vente.description || "",
+                price: vente.price || "",
+                oferta: vente.oferta || "",
+                change: vente.change || "",
+                commune: vente.commune || "",
+                wilaya: vente.wilaya || "",
+                email: vente.email || "",
+                contadordevisitas: vente.contadordevisitas || "",
+                informacion: vente.informacion || "",
+                comentarios: vente.comentarios || "",
+                duraciondelanuncio: vente.duraciondelanuncio || "",
+
+            });
+            setImages(vente.images || []); // Asegurar imágenes
+
+        }
+    }, [vente]);
+
+
+
+
+    const handleChangeInput = (e, customValue = null) => {
+        if (customValue !== null) {
+            // Si customValue está definido, lo usamos directamente (para sliders)
+            const name = e; // El primer argumento es el nombre del campo
+            setPostData({ ...postData, [name]: customValue });
+        } else {
+            // Para eventos normales
+            const { name, value, type, checked } = e.target;
+            if (type === 'checkbox') {
+                setPostData({ ...postData, [name]: checked });
+            } else {
+                setPostData({ ...postData, [name]: value });
+            }
+        }
+    };
+    return (
+        <div className='status_modal' >
+            <form onSubmit={handleSubmit}>
+                <div className="status_header">
+                    <h5 className="m-0">Vente immobiler</h5>
+                    <span onClick={() => dispatch({
+                        type: GLOBALTYPES.VENTE, payload: false
+                    })}>
+                        &times;
+                    </span>
+                </div>
+
+                <div className="status_body">
+                    <div className="form-group">
+                        {/* Categoría principal */}
+                        <select
+                            onChange={handleChangeInput}
+                            value={postData.subCategory}
+                            name="subCategory"
+                            className="form-control"
+                            required
+                        >
+                            <option value="">Sélectionner une catégorie</option>
+                            <option value="vente">Vente</option>
+                            <option value="location">Location</option>
+                            <option value="echange">Echange</option>
+                        </select>
+                        <small className='text-danger'>Ce champ est requis</small>
+
+                        {/* Subcategorías para "vente" */}
+                        {postData.subCategory === "vente" && (
+                            <div>
+                                <div className="form-group">
+                                    <select
+                                        onChange={handleChangeInput}
+                                        value={postData.papiersOption}
+                                        name="papiersOption"
+                                        className="form-control"
+                                    >
+                                        <option value="">Sélectionner une sub catégorie</option>
+                                        <option value="villa">Villa</option>
+                                        <option value="appartement">Appartement</option>
+                                    </select>
+                                </div>
+
+                                {/* Sub-subcategorías para "appartement" */}
+                                {postData.papiersOption === "appartement" && (
+                                    <div>
+                                        <div className="form-group">
+
+                                            <input
+                                                type="number"
+                                                name="superficie"
+                                                value={postData.superficie}
+                                                onChange={handleChangeInput}
+                                                className="form-control"
+                                                placeholder="Superficie en M²"
+                                            />
+                                        </div>
+                                        <div className="form-group"  >
+                                            <input
+                                                type="number"
+                                                name="etage"
+                                                value={postData.etage}
+                                                onChange={handleChangeInput}
+                                                className="form-control"
+                                                placeholder="Etage(s)"
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <div className="form-group">
+                                                <input
+                                                    type="text"
+                                                    name="piece"
+                                                    value={postData.piece}
+                                                    onChange={handleChangeInput}
+                                                    className="form-control"
+                                                    placeholder="Pièces"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="form-group" >
+                                            <FormCheck
+                                                type="checkbox"
+                                                name="promoteurimmobilier"
+                                                checked={postData.promoteurimmobilier}
+                                                onChange={handleChangeInput}
+                                                label="Promotion immobilière"
+                                            />
+                                        </div>
+
+                                        <div className="form-group"  >
+                                            <FormCheck
+                                                type="checkbox"
+                                                name="parlepromoteurimmobilier"
+                                                checked={postData.parlepromoteurimmobilier}
+                                                onChange={handleChangeInput}
+                                                label="Parle du promoteur immobilier"
+                                            />
+                                        </div>
+                                    </div>
+
+
+                                )}
+                            </div>
+                        )}
+
+                        {/* Opciones específicas para "echange" */}
+                        {postData.subCategory === "echange" && (
+                            <div>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        name="piece"
+                                        value={postData.piece}
+                                        onChange={handleChangeInput}
+                                        className="form-control"
+                                        placeholder="Mémoire"
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        name="piece"
+                                        value={postData.piece}
+                                        onChange={handleChangeInput}
+                                        className="form-control"
+                                        placeholder="Pièces"
+                                    />
+                                </div>
+
+
+                            </div>
+                        )}
+                    </div>
+
+
+
+
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Description: </label>
+                        <textarea name="description" value={postData.description}
+                            onChange={handleChangeInput}
+                            placeholder='Description...'
+                        />
+                    </div>
+                    <div className="card-body form-group">
+                        <label className="text-danger">Prix en Dinars </label>
+                        <div style={{ padding: '0 20px' }}>
+                            <Slider
+                                min={500}
+                                max={2000000}
+                                step={500}
+                                value={postData.price || 0} // Si no hay precio, el slider empieza en 0
+                                onChange={(value) => handleChangeInput('price', value)} // Usamos customValue
+                                trackStyle={{ backgroundColor: '#44EB00', height: 10 }}
+                                handleStyle={{
+                                    borderColor: '#00AF72',
+                                    height: 20,
+                                    width: 20,
+                                    marginLeft: -10,
+                                    marginTop: -5,
+                                    backgroundColor: '#007bff',
+                                }}
+                                railStyle={{ backgroundColor: '#ccc', height: 10 }}
+                            />
+                        </div>
+                        <div style={{ marginTop: 10 }}>
+                            {postData.price ? `${postData.price} DA` : "Sin precio"} {/* Mostrar mensaje "Sin precio" */}
+                        </div>
+                    </div>
+
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Type D'offre</label>
+                        <select
+                            multiple={false}
+                            name="oferta"
+                            value={postData.oferta}
+                            onChange={handleChangeInput}
+                            className="form-control"
+                        >
+                            <option value="Fixe">Fixe</option>
+                            <option value="Négociable">Négociable</option>
+                            <option value="Offert">Offert</option>
+
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label className="text-primary">Change</label>
+                        <select
+                            multiple={false}
+                            name="change"
+                            value={postData.change}
+                            onChange={handleChangeInput}
+                            className="form-control"
+                        >
+                            <option value="J'accepte l'échange">J'accepte l'échange</option>
+                            <option value="Pas d'échanges">Pas d'échanges </option>
+
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label className="text-primary">Wilaya:</label>
+                        <select
+                            multiple={false}
+                            className="form-control"
+
+
+
+                        >
+                            <option value="">Seleccionar wilaya</option>
+
+                        </select>
+                        <small className='text-danger'>Ce champ est requis</small>
+                    </div>
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Commune:</label>
+                        <select
+                            multiple={false}
+                            className="form-control"
+
+
+                        >
+                            <option value="">Seleccionar commune</option>
+
+                        </select>
+                        <small className='text-danger'>Ce champ est requis</small>
+                    </div>
+
+
+
+
+                    <div className="form-group">
+                        <label className="text-primary">Email</label>
+                        <input onChange={handleChangeInput} value={postData.email} name="email" type="email" className="form-control" placeholder='Email' required />
+                        <small className='text-danger'>Ce champ est requis</small>
+                    </div>
+
+
+
+                    <div>
+                        <label className="text-primary">Options générales</label>
+                        <div className="form-group">
+                            <FormCheck
+                                type="checkbox"
+                                checked={postData.contadordevisitas}
+                                onChange={(e) => setPostData({ ...postData, contadordevisitas: e.target.checked })}
+                                label="Afficher lo compteur des visites"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <FormCheck
+                                type="checkbox"
+                                checked={postData.informacion}
+                                onChange={(e) => setPostData({ ...postData, informacion: e.target.checked })}
+                                label="Autoriser les informations de contact"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <FormCheck
+                                type="checkbox"
+                                checked={postData.comentarios}
+                                onChange={(e) => setPostData({ ...postData, comentarios: e.target.checked })}
+                                label="Activer les commentaires"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-primary">Durée de l' annonces</label>
+                            <select
+                                multiple={false}
+                                onChange={handleChangeInput} value={postData.duraciondelanuncio} name="duraciondelanuncio" className="form-control" >
+
+                                <option value="nepasdesactiver">Ne pas désactiver</option>
+                                <option value="15 jour">15 Jours</option>
+                                <option value="1 mois">1 Mois</option>
+                                <option value="3 mois">3 Mois</option>
+                                <option value="6 mois">6 Mois</option>
+
+                            </select>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <div className="show_images">
+                        {
+                            images.map((img, index) => (
+                                <div key={index} id="file_img">
+                                    {
+                                        img.camera ? imageShow(img.camera, theme)
+                                            : img.url
+                                                ? <>
+                                                    {
+                                                        img.url.match(/video/i)
+                                                            ? videoShow(img.url, theme)
+                                                            : imageShow(img.url, theme)
+                                                    }
+                                                </>
+                                                : <>
+                                                    {
+                                                        img.type.match(/video/i)
+                                                            ? videoShow(URL.createObjectURL(img), theme)
+                                                            : imageShow(URL.createObjectURL(img), theme)
+                                                    }
+                                                </>
+                                    }
+                                    <span onClick={() => deleteImages(index)}>&times;</span>
+                                </div>
+                            ))
+                        }
+                    </div>
+
+                    {
+                        stream &&
+                        <div className="stream position-relative">
+                            <video autoPlay muted ref={videoRef} width="100%" height="100%"
+                                style={{ filter: theme ? 'invert(1)' : 'invert(0)' }} />
+
+                            <span onClick={handleStopStream}>&times;</span>
+                            <canvas ref={refCanvas} style={{ display: 'none' }} />
+                        </div>
+                    }
+
+                    <div className="input_images">
+                        {
+                            stream
+                                ? <i className="fas fa-camera" onClick={handleCapture} />
+                                : <>
+                                    <i className="fas fa-camera" onClick={handleStream} />
+
+                                    <div className="file_upload">
+                                        <i className="fas fa-image" />
+                                        <input type="file" name="file" id="file"
+                                            multiple accept="image/*,video/*" onChange={handleChangeImages} />
+                                    </div>
+                                </>
+                        }
+
+                    </div>
+
+
+
+                    <div className="status_footer">
+                        <button className="btn btn-secondary w-100" type="submit">
+                            Post
+                        </button>
+                    </div>
+                </div>
+            </form >
+        </div >
+    )
+}
+
+export default Vente
