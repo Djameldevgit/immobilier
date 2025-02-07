@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getDataAPI } from '../../utils/fetchData'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
@@ -34,15 +34,17 @@ const Search = () => {
         setSearch('')
         setUsers([])
     }
-
+    useEffect(() => {
+        setSearch(prev => prev.toLowerCase().replace(/ /g, ''));
+    }, [search]);
     return (
         <form className="search_form" onSubmit={handleSearch}>
-            <input type="text" name="search" value={search} id="search" title="Enter to Search"
+            <input type="text" name="search" value={search} id="search" title="Recherch"
             onChange={e => setSearch(e.target.value.toLowerCase().replace(/ /g, ''))} />
 
             <div className="search_icon" style={{opacity: search ? 0 : 0.3}}>
                 <span className="material-icons">search</span>
-                <span>Enter to Search</span>
+                <span>Recherche</span>
             </div>
 
             <div className="close_search" onClick={handleClose}
@@ -50,7 +52,7 @@ const Search = () => {
                 &times;
             </div>
 
-            <button type="submit" style={{display: 'none'}}>Search</button>
+            <button type="submit" style={{display: 'none'}}>Recherche</button>
 
             { load && <img className="loading" src={LoadIcon} alt="loading"  /> }
 

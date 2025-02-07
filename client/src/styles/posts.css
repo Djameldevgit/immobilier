@@ -44,18 +44,29 @@
  .cardheader-descripction {
      display: flex;
      align-items: center;
-     gap: 12px;
+     gap: 5px;
      font-size: 14px;
      flex: 1;
  }
 
  /* 🎨 Estilos del texto */
- .category,
- .subcategory,
- .title {
-     font-weight: bold;
-     color: #333;
- }
+  
+ .category {
+        font-weight: bold;
+        text-transform: uppercase;
+         color: rgb(119, 27, 27);  
+        margin-right: 0px;
+     }
+     .subcategory {
+        font-weight: bold;
+          color: rgb(33, 146, 52);  
+      }
+
+.title {
+     
+  color: rgb(150, 133, 37);
+   }
+
 
  /* === 🔘 Icono de opciones (tres puntos) === */
  .nav-item {
@@ -130,11 +141,12 @@
  /* === 🕒 Momento del post (ahora debajo del header) === */
  .card-moment {
      padding: 5px 15px;
+   margin-bottom: 5px;
  }
 
  .card-moment small {
      font-size: 12px;
-     color: #888;
+     color: rgb(66, 62, 62);
  }
 
  /* === 📷 Imagen del post === */
