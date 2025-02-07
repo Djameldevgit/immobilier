@@ -1,107 +1,186 @@
-.header .imagelogo {
-    width: 70px;
-    height: 50px;
-}
+ .header .imagelogo {
+     width: 70px;
+     height: 50px;
+ }
 
-.posts {
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    justify-content: center;
-    grid-gap: 5px;
-    overflow: hidden;
-    margin: 5px 0;
-    padding: 10px;
+ .posts {
+     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+     width: 100%;
 
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+     justify-content: center;
+     grid-gap: 10px;
+     overflow: hidden;
+     margin: 15px 0;
+ }
 
-    
-}
+ /* === 📌 Estilos generales de la tarjeta === */
+ .cardpost {
+     background: #fff;
+     border-radius: 10px;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+     overflow: hidden;
+     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-.posts .cardheaderpost {
-    background-color: #05c1e2ef;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+ }
 
+ .cardpost:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+ }
+
+ /* === 🔹 Header de la tarjeta === */
+ .cardheader {
+     padding: 15px;
+     border-bottom: 1px solid #eee;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ /* Contenedor de la descripción (categoría, subcategoría y título) */
+ .cardheader-descripction {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     font-size: 14px;
+     flex: 1;
+ }
+
+ /* 🎨 Estilos del texto */
+ .category,
+ .subcategory,
+ .title {
+     font-weight: bold;
+     color: #333;
+ }
+
+ /* === 🔘 Icono de opciones (tres puntos) === */
+ .nav-item {
+     position: relative;
+     cursor: pointer;
+     margin-left: auto;
+ }
+
+ .material-icons {
+     font-size: 22px;
+     color: #666;
+     transition: color 0.3s ease-in-out;
+ }
+
+ /* 🖱️ Efecto hover en el icono */
+ .nav-item:hover .material-icons {
+     color: #000;
+ }
+
+ /* === 📌 Menú desplegable === */
+ .post-menu {
+     position: absolute;
+     top: 25px;
+     right: 0;
+     background: white;
+     border-radius: 8px;
+     border: 1px solid rgba(0, 0, 0, 0.1);
+     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+     display: none;
+     z-index: 2000;
+     min-width: 180px;
+     padding: 8px 0;
+     animation: fadeIn 0.2s ease-in-out;
+ }
+
+ /* 🖱️ Mostrar menú al pasar el cursor */
+ .nav-item:hover .post-menu {
+     display: block;
+ }
+
+ /* ✨ Animación de aparición */
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(-5px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ /* 🔹 Opciones del menú */
+ .post-menu .dropdown-item {
+     padding: 10px 16px;
+     font-size: 14px;
+     color: #333;
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     transition: background 0.2s ease-in-out;
+     cursor: pointer;
+ }
+
+ /* 🎨 Efecto hover en las opciones del menú */
+ .post-menu .dropdown-item:hover {
+     background: rgba(0, 0, 0, 0.05);
+     border-radius: 4px;
+ }
+
+ /* === 🕒 Momento del post (ahora debajo del header) === */
+ .card-moment {
+     padding: 5px 15px;
+ }
+
+ .card-moment small {
+     font-size: 12px;
+     color: #888;
+ }
+
+ /* === 📷 Imagen del post === */
+ .cardbody {
+     position: relative;
+     overflow: hidden;
+ }
+
+ .imagecarousel {
+     width: 100%;
+     height: auto;
+     overflow: auto;
+     border-radius: 10px;
+ }
+
+ /* === 🔘 Botón "Voir détails" === */
+ .btnpost {
+     padding: 15px;
+     text-align: center;
+     width: 100%;
+ }
+
+ .post-card__button {
+     background: #007bff;
+     color: white;
+     padding: 12px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     font-size: 14px;
+     width: 100%;
+     transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+ }
+
+ /* 🖱️ Efecto hover en el botón */
+ .post-card__button:hover {
+     background: #0056b3;
+     transform: scale(1.05);
+ }
  
-.posts .cardbody {
- 
- padding: 3px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+ @media (width> 766px) {
+     .imagecarousel {
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
 
- 
-.posts .cardbody:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+     }
 
-
-
-.posts .cardbody .imagecarousel {
-    background: #00d9ff;
-    width: 100%;
-    height: 350px;
-    overflow: hidden;
-
-}
-
-.posts .cardbody .btnpost {
-    display: block;
-
-}
-
-.posts .cardbody button {
-    width: 100%;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    padding: 12px 20px;
-    /* Más espacio interno */
-    background-color: #007bff;
-    /* Azul moderno */
-    color: white;
-    /* Texto en blanco */
-    border: none;
-    /* Sin borde */
-    border-radius: 8px;
-    /* Esquinas redondeadas */
-    font-size: 16px;
-    /* Tamaño de fuente */
-    font-weight: 500;
-    /* Grosor de la fuente */
-    cursor: pointer;
-    /* Cambia el cursor al pasar */
-    
-
-
-    /* Transición suave */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-}
-
-.posts .cardbody button:hover {
-    background-color: #0056b3;
-    /* Azul más oscuro al pasar el mouse */
-  
-    /* Efecto de levantar */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    /* Sombra más pronunciada */
-}
-
-.posts .cardbody button:active {
-    transform: translateY(0);
-    /* Vuelve a la posición original al hacer clic */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Sombra original */
-}
-
-
-
-
- 
+ } 

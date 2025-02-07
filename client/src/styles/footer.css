@@ -1,0 +1,42 @@
+.card_footer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+.card_icon_menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    font-size: 1.5rem;
+}
+
+.card_icon_menu i {
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.2s ease;
+}
+
+.card_icon_menu i:hover {
+    transform: scale(1.1);
+}
+
+.card_footer h6 {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* 📱 Responsivo */
+@media (max-width: 768px) {
+    .card_icon_menu {
+        font-size: 1.2rem;
+    }
+
+    .card_footer h6 {
+        font-size: 0.8rem;
+    }
+}

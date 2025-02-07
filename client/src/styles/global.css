@@ -30,7 +30,7 @@ code {
 
 .main {
   max-width: auto;
-  width: 98%;
+  width: 100%;
   min-height: 100vh;
   margin: auto;
 }
@@ -80,10 +80,12 @@ img {
 
 @import url("./posts.css");
 @import url("./description.css");
+@import url("./detailpost.css");
+@import url("./footer.css");
 /* --------- Responsive ------ */
 @media (max-width: 766px){
   .header .navbar .logo{
-    display: none;
+    display: block;
   }
   .header .menu{
       width: 100%;
@@ -117,7 +119,19 @@ img {
   }
 }
 
+@media (max-width: 767px) {
+  
 
+  .logo {
+    display: block !important; /* Asegura que el logo aparezca */
+}
+  @media (max-width: 766px) {
+    menu    .home-icon {
+        display: none ! /* Fuerza a ocultarlo */
+    }
+}
+}
+ 
 
 
 .mode{
@@ -125,3 +139,5 @@ img {
   height: 100vh;
   overflow: hidden;
 }
+
+ 

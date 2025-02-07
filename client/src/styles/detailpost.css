@@ -1,0 +1,13 @@
+.description {
+    font-display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+}
+
+.description .body1 {
+    background-color: rgb(4, 0, 255);
+}
+
+.description .body2 {
+    background-color: rgb(1, 9, 83);
+}

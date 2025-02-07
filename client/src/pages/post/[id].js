@@ -23,15 +23,21 @@ const Post = () => {
     },[detailPost, dispatch, id, auth])
 
     return (
-        <div className="post">
+        <div>
             {
                 post.length === 0 &&
-                <img src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />
+               <div className='imagedetails'>
+                 <img src={LoadIcon} alt="loading" className="d-block mx-auto my-4" />
+               </div>
+               
             }
 
             {
+                
                 post.map(item => (
-                    <PostCard key={item._id} post={item} />
+                <div className="postdetalle">
+                    <PostCard key={item._id} post={item} cl />
+                    </div>
                 ))
             }
         </div>

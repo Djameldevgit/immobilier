@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Send from '../../../images/send.svg'
+ 
 import LikeButton from '../../LikeButton'
 import { useSelector, useDispatch } from 'react-redux'
 import { likePost, unLikePost, savePost, unSavePost } from '../../../redux/actions/postAction'
-import ShareModal from '../../ShareModal'
-import { BASE_URL } from '../../../utils/config'
+ 
 
 
-const CardFooter = ({post, isPostDetailPage}) => {
+const CardFooter = ({post }) => {
     const [isLike, setIsLike] = useState(false)
     const [loadLike, setLoadLike] = useState(false)
-    const [isShare, setIsShare] = useState(false)
-    const { auth, theme, socket } = useSelector(state => state)
+  
+    const { auth,  socket } = useSelector(state => state)
     const dispatch = useDispatch()
     const [saved, setSaved] = useState(false)
     const [saveLoad, setSaveLoad] = useState(false)
@@ -64,7 +63,7 @@ const CardFooter = ({post, isPostDetailPage}) => {
     }
 
     return (
-        <div className="card_footer">
+        <div className="card_footer ">
               <h4 className="card-title" style={{ color: '#333', borderBottom: '2px solid #FFD700', paddingBottom: '10px' }}></h4>
    
             <div className="card_icon_menu">
@@ -78,8 +77,7 @@ const CardFooter = ({post, isPostDetailPage}) => {
                     <Link to={`/post/${post._id}`} className="text-dark">
                         <i className="far fa-comment" />
                     </Link>
-
-                    <img src={Send} alt="Send" onClick={() => setIsShare(!isShare)} />
+ 
                 </div>
 
                 {
@@ -98,14 +96,7 @@ const CardFooter = ({post, isPostDetailPage}) => {
                     {post.comments.length} comments
                 </h6>
             </div>
-
-          
-
-            { 
-              isShare && <ShareModal url={`${BASE_URL}/post/${post._id}`} theme={theme} /> 
-            }
-              <h4 className="card-title" style={{ color: '#333', borderBottom: '2px solid #FFD700', paddingBottom: '10px' }}></h4>
-   
+ 
         </div>
     )
 }

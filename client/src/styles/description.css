@@ -1,44 +1,79 @@
 .description {
-     
-    padding: 20px;
-}
-
-.description .body1 {
-    background-color: rgb(207, 200, 216);
-}
-
-.description .body1 {
-    background-color: rgb(207, 200, 216);
-}
-.cardheaderpost {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 5px;
+    flex-direction: column;
+    gap: 20px;
 }
-.description-header {
+
+/* 🔹 Estilo de la primera parte (Atributos) */
+.body1 {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-size: 14px;
+}
+
+.body1 li {
+    list-style: none;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+    color: #444;
+    font-size: 17px;
+}
+
+.body1 li:last-child {
+    border-bottom: none;
+   
+}
+
+/* 🔹 Estilo responsive de la segunda parte (Detalles adicionales) */
+.body2 {
     display: flex;
+    flex-wrap: wrap;  /* Permite que los elementos bajen de línea */
+    gap: 7px;
     justify-content: space-between;
+}
+
+.body2 div {
+    flex: 1 1 calc(50% - 15px); /* Mínimo 50% del ancho en pantallas medianas */
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
     align-items: center;
-    cursor: pointer;
-    padding: 5px;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+    transition: background 0.3s ease-in-out;
+    min-width: 200px; /* Evita que los elementos se hagan muy pequeños */
 }
 
-.description-header .category {
-    font-weight: bold;
-    font-size: 15px;
-    margin-right: 11px;
+.body2 div:hover {
+    background: #e0e0e0;
 }
 
-.description-header .subcategory {
-    font-weight: bold;
-     font-size: 15px;
-     margin-right: 11px;
+/* 🔹 Estilos para los iconos */
+.body2 i {
+    font-size: 18px;
+    color: #007bff;
 }
 
-.description-header .title {
+/* 🔥 Media query para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .body2 {
+        flex-direction: column; /* En móviles los pone en una sola columna */
+    }
 
-    font-size: 20px;
-    margin-right: 14px;
+    .body2 div {
+        flex: 1 1 100%; /* Cada elemento ocupa el 100% en móviles */
+    }
 }
+
+
+
+

@@ -13,6 +13,8 @@ const Menu = () => {
         { label: 'Message', icon: 'near_me', path: '/message' },
         { label: 'Discover', icon: 'explore', path: '/discover' }
     ]
+
+
     const { auth, theme, notify } = useSelector(state => state)
     const dispatch = useDispatch()
     const { pathname } = useLocation()
@@ -27,15 +29,16 @@ const Menu = () => {
                 <div className="menu">
                     <ul className="navbar-nav flex-row">
                         {/* Renderizar los enlaces de navegación */}
-                        {
-                            navLinks.map((link, index) => (
-                                <li className={`nav-item px-2 ${isActive(link.path)}`} key={index}>
-                                    <Link className="nav-link" to={link.path}>
-                                        <span className="material-icons">{link.icon}</span>
-                                    </Link>
-                                </li>
-                            ))
-                        }
+                        {navLinks.map((link, index) => (
+                            <li
+                                key={index}
+                                className={`nav-item px-2 ${isActive(link.path)} ${link.label === 'Home' ? 'home-icon' : ''}`}
+                            >
+                                <Link className="nav-link" to={link.path}>
+                                    <span className="material-icons">{link.icon}</span>
+                                </Link>
+                            </li>
+                        ))}
                         {/* Renderizar el menú desplegable para notificaciones */}
                         <li className="nav-item dropdown" style={{ opacity: 1 }}>
                             <span className="nav-link position-relative" id="navbarDropdown"
