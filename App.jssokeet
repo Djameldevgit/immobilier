@@ -1,0 +1,45 @@
+import React, { useState, useEffect } from "react";
+import socket from "./socket";
+  
+function App() {
+  const [mensaje, setMensaje] = useState("");
+  const [mensajes, setMensajes] = useState([]);
+
+  useEffect(() => {
+    // Escuchar mensajes desde el servidor
+    socket.on("mensaje", (data) => {
+      setMensajes((prevMensajes) => [...prevMensajes, data]);
+    });
+
+    return () => {
+      socket.off("mensaje");
+    };
+  }, []);
+
+  const enviarMensaje = () => {
+    if (mensaje.trim()) {
+      socket.emit("mensaje", mensaje); // Enviar mensaje al servidor
+      setMensaje("");
+    }
+  };
+
+  return (
+    <div>
+      <h1>Chat en Tiempo Real</h1>
+      <div>
+        {mensajes.map((msg, index) => (
+          <p key={index}>{msg}</p>
+        ))}
+      </div>
+      <input
+        type="text"
+        value={mensaje}
+        onChange={(e) => setMensaje(e.target.value)}
+        placeholder="Escribe un mensaje..."
+      />
+      <button onClick={enviarMensaje}>Enviar</button>
+    </div>
+  );
+}
+
+export default App;

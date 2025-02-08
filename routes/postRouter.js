@@ -4,7 +4,7 @@ const auth = require('../middleware/auth')
 router.post('/posts', auth, postCtrl.createPostPendiente);
 //router.get('/countpostspendientes', auth, postCtrl.countPostsPendientes)
 //router.get('/countposts', auth, postCtrl.countPosts)
-router.get('/getpostspendientes', auth, postCtrl.getPostsPendientes);
+router.get('/posts', auth, postCtrl.getPostsPendientes);
 
 
 //router.get('/user/:id/count-posts', auth, postCtrl.counTotalPostsUserCtrl);

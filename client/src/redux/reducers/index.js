@@ -17,7 +17,7 @@ import call from './callReducer'
 import peer from './peerReducer'
 import statusimmobilier from './status/immobilier'
 import homePostsAprove from './postaproveReducer'
- 
+import languageReducer from './languageReducer'
 
 export default combineReducers({
     auth,
@@ -35,5 +35,5 @@ export default combineReducers({
     message,
     online,
     call,
-    peer,statusimmobilier,homePostsAprove
+    peer,statusimmobilier,homePostsAprove,languageReducer
 })

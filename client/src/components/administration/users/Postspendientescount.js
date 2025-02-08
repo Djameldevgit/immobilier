@@ -1,9 +1,9 @@
 
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getcountpostspendientes, POSTAPROVE_TYPES } from '../../../redux/actions/postaproveAction';
+import {  getcountpostspendientes, POSTAPROVE_TYPES } from '../../../redux/actions/postaproveAction';
 import { getDataAPI } from '../../../utils/fetchData';
-
+ 
 const Postspendientescount = () => {
 
   const { homePostsAprove, auth } = useSelector((state) => state);

@@ -5,9 +5,14 @@ import { logout } from '../../redux/actions/authAction'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import Avatar from '../Avatar'
 import NotifyModal from '../NotifyModal'
+import LanguageSelector from '../LanguageSelector'
+import { useTranslation } from 'react-i18next'
 
 
 const Menu = () => {
+
+    const { t } = useTranslation()
+
     const navLinks = [
         { label: 'Home', icon: 'home', path: '/' },
         { label: 'Message', icon: 'near_me', path: '/message' },
@@ -15,7 +20,7 @@ const Menu = () => {
     ]
 
 
-    const { auth, theme, notify } = useSelector(state => state)
+    const { auth, theme, notify, languageReducer } = useSelector(state => state)
     const dispatch = useDispatch()
     const { pathname } = useLocation()
 
@@ -56,16 +61,34 @@ const Menu = () => {
                                 <Avatar src={auth.user.avatar} size="medium-avatar" />
                             </span>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>Profile</Link>
+                                <div className='language'>
+                                    <LanguageSelector />
+                                </div>
+
+
+                                <Link className="dropdown-item" to='/annonces'> {t('post', { lng: languageReducer.language })}</Link>
+
+                                <Link className="dropdown-item" to='/administracion/usermanagement'> {t('usermanagement', { lng: languageReducer.language })}</Link>
+
+                                <Link className="dropdown-item" to='/users/denuncias'> {t('complaints', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/activityusers'> {t('activityusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/searchusers'> {t('searchusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/lastusers'> {t('lastusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/roles/userRole'> {t('userroles', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/administracion/postspendientes'> {t('pendingposts', { lng: languageReducer.language })}</Link>
+
+
+
+                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}> {t('profile', { lng: languageReducer.language })}</Link>
                                 <label htmlFor="theme" className="dropdown-item" onClick={() => dispatch({ type: GLOBALTYPES.THEME, payload: !theme })}>
-                                    {theme ? 'Light mode' : 'Dark mode'}
+                                    {t(theme ? 'light_mode' : 'dark_mode', { lng: languageReducer.language })}
+
+
                                 </label>
                                 <div className="dropdown-divider"></div>
                                 <Link className="dropdown-item" to="/login" onClick={() => dispatch(logout())}>
-                                    <i className="fas fa-power-off" style={{ color: 'red' }}></i> Se déconnecter
+                                    <i className="fas fa-power-off" style={{ color: 'red' }}></i>  {t('logout', { lng: languageReducer.language })}
                                 </Link>
-
-
                             </div>
                         </li>
                     </ul>
@@ -119,27 +142,33 @@ const Menu = () => {
                                 <Avatar src={auth.user.avatar} size="medium-avatar" />
                             </span>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <Link className="dropdown-item" to='/annonces'>Publie une annonce</Link>
-
-                                <Link className="dropdown-item" to='/administracion/usermanagement'>user management</Link>
-
-                                <Link className="dropdown-item" to='/users/denuncias'>Denuncias</Link>
-                                <Link className="dropdown-item" to='/users/activityusers'>Activity Users</Link>
-                                <Link className="dropdown-item" to='/users/searchusers'>Search Users</Link>
-                                <Link className="dropdown-item" to='/users/lastusers'>Last Users</Link>
-                                <Link className="dropdown-item" to='/roles/userRole'>Roles</Link>
-                                <Link className="dropdown-item" to='/administracion/postspendientes'>posts pendientes</Link>
+                                <div className='language'>
+                                    <LanguageSelector />
+                                </div>
 
 
+                                <Link className="dropdown-item" to='/annonces'> {t('post', { lng: languageReducer.language })}</Link>
 
-                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>Profile</Link>
+                                <Link className="dropdown-item" to='/administracion/usermanagement'> {t('usermanagement', { lng: languageReducer.language })}</Link>
+
+                                <Link className="dropdown-item" to='/users/denuncias'> {t('complaints', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/activityusers'> {t('activityusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/searchusers'> {t('searchusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/lastusers'> {t('lastusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/roles/userRole'> {t('userroles', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/administracion/postspendientes'> {t('pendingposts', { lng: languageReducer.language })}</Link>
+
+
+
+                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}> {t('profile', { lng: languageReducer.language })}</Link>
                                 <label htmlFor="theme" className="dropdown-item" onClick={() => dispatch({ type: GLOBALTYPES.THEME, payload: !theme })}>
-                                    {theme ? 'Light mode' : 'Dark mode'}
+                                    {t(theme ? 'light_mode' : 'dark_mode', { lng: languageReducer.language })}
+
+
                                 </label>
                                 <div className="dropdown-divider"></div>
                                 <Link className="dropdown-item" to="/login" onClick={() => dispatch(logout())}>
-                                    <i className="fas fa-power-off" style={{ color: 'red' }}></i> Se déconnecter
+                                    <i className="fas fa-power-off" style={{ color: 'red' }}></i>  {t('logout', { lng: languageReducer.language })}
                                 </Link>
                             </div>
                         </li>
@@ -204,34 +233,35 @@ const Menu = () => {
                                 <Avatar src={auth.user.avatar} size="medium-avatar" />
                             </span>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <button className="statusBtn flex-fill"
-                                    onClick={() => dispatch({ type: GLOBALTYPES.STATUS, payload: true })}>
-                                    Publie un annonce
-                                </button>
-                                <Link className="dropdown-item" to='/annonces'>Publie une annonce</Link>
-
-                                <Link className="dropdown-item" to='/administracion/usermanagement'>user management</Link>
-
-                                <Link className="dropdown-item" to='/users/denuncias'>Denuncias</Link>
-                                <Link className="dropdown-item" to='/users/activityusers'>Activity Users</Link>
-                                <Link className="dropdown-item" to='/users/searchusers'>Search Users</Link>
-                                <Link className="dropdown-item" to='/users/lastusers'>Last Users</Link>
-                                <Link className="dropdown-item" to='/roles/userRole'>Roles</Link>
-                                <Link className="dropdown-item" to='/administracion/postspendientes'>posts pendientes</Link>
+                                <div className='language'>
+                                    <LanguageSelector />
+                                </div>
 
 
-                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>Profile</Link>
+                                <Link className="dropdown-item" to='/annonces'> {t('post', { lng: languageReducer.language })}</Link>
+
+                                <Link className="dropdown-item" to='/administracion/usermanagement'> {t('usermanagement', { lng: languageReducer.language })}</Link>
+
+                                <Link className="dropdown-item" to='/users/denuncias'> {t('complaints', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/activityusers'> {t('activityusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/searchusers'> {t('searchusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/lastusers'> {t('lastusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/roles/userRole'> {t('userroles', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/administracion/postspendientes'> {t('pendingposts', { lng: languageReducer.language })}</Link>
 
 
 
+                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}> {t('profile', { lng: languageReducer.language })}</Link>
                                 <label htmlFor="theme" className="dropdown-item" onClick={() => dispatch({ type: GLOBALTYPES.THEME, payload: !theme })}>
-                                    {theme ? 'Light mode' : 'Dark mode'}
+                                    {t(theme ? 'light_mode' : 'dark_mode', { lng: languageReducer.language })}
+
+
                                 </label>
                                 <div className="dropdown-divider"></div>
                                 <Link className="dropdown-item" to="/login" onClick={() => dispatch(logout())}>
-                                    <i className="fas fa-power-off" style={{ color: 'red' }}></i> Se déconnecter
-                                </Link>            </div>
+                                    <i className="fas fa-power-off" style={{ color: 'red' }}></i>  {t('logout', { lng: languageReducer.language })}
+                                </Link>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -293,14 +323,34 @@ const Menu = () => {
                                 <Avatar src={auth.user.avatar} size="medium-avatar" />
                             </span>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div className='language'>
+                                    <LanguageSelector />
+                                </div>
 
 
-                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>Profile</Link>
+                                <Link className="dropdown-item" to='/annonces'> {t('post', { lng: languageReducer.language })}</Link>
+
+                                <Link className="dropdown-item" to='/administracion/usermanagement'> {t('usermanagement', { lng: languageReducer.language })}</Link>
+
+                                <Link className="dropdown-item" to='/users/denuncias'> {t('complaints', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/activityusers'> {t('activityusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/searchusers'> {t('searchusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/users/lastusers'> {t('lastusers', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/roles/userRole'> {t('userroles', { lng: languageReducer.language })}</Link>
+                                <Link className="dropdown-item" to='/administracion/postspendientes'> {t('pendingposts', { lng: languageReducer.language })}</Link>
+
+
+
+                                <Link className="dropdown-item" to={`/profile/${auth.user._id}`}> {t('profile', { lng: languageReducer.language })}</Link>
                                 <label htmlFor="theme" className="dropdown-item" onClick={() => dispatch({ type: GLOBALTYPES.THEME, payload: !theme })}>
-                                    {theme ? 'Light mode' : 'Dark mode'}
+                                    {t(theme ? 'light_mode' : 'dark_mode', { lng: languageReducer.language })}
+
+
                                 </label>
                                 <div className="dropdown-divider"></div>
-                                <Link className="dropdown-item" to="/login" onClick={() => dispatch(logout())}>Logout</Link>
+                                <Link className="dropdown-item" to="/login" onClick={() => dispatch(logout())}>
+                                    <i className="fas fa-power-off" style={{ color: 'red' }}></i>  {t('logout', { lng: languageReducer.language })}
+                                </Link>
                             </div>
                         </li>
                     </ul>

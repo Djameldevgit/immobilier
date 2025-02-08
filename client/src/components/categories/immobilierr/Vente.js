@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { imageShow, videoShow } from '../../../utils/mediaShow';
 import { GLOBALTYPES } from '../../../redux/actions/globalTypes';
-import {   createPostVentePendiente, updatePost } from '../../../redux/actions/categories/immobilier/vente';
+ import { createPostPendiente, updatePost } from '../../../redux/actions/postaproveAction';
+  
 import { FormCheck } from 'react-bootstrap';
 import Select from 'react-select';
 import communesjson from "../../../json/communes.json"
@@ -239,7 +240,7 @@ const Vente = () => {
             dispatch(updatePost({ postData, images, auth, vente }));
         } else {
             // dispatch(createPostVente({ postData, images, auth, socket }));
-            dispatch(createPostVentePendiente({ postData, images, auth, socket }));
+            dispatch(createPostPendiente({ postData, images, auth, socket }));
 
         }
 

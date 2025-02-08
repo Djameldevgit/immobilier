@@ -79,17 +79,12 @@ const LeftSide = () => {
             dispatch({type: MESS_TYPES.CHECK_ONLINE_OFFLINE, payload: online})
         }
     },[online, message.firstLoad, dispatch])
-     
 
-    useEffect(() => {
-        setSearch(prev => prev.toLowerCase().replace(/ /g, ''));
-    }, [search]);
-    
     return (
         <>
             <form className="message_header" onSubmit={handleSearch} >
                 <input type="text" value={search}
-                placeholder="Recherche..."
+                placeholder="Enter to Search..."
                 onChange={e => setSearch(e.target.value)} />
 
                 <button type="submit" style={{display: 'none'}}>Search</button>

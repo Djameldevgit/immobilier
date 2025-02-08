@@ -3,9 +3,10 @@ import LoadIcon from '../../images/loading.gif';
 import { useSelector, useDispatch } from 'react-redux';
 import Postspendientess from '../../components/home/Postspendientess';
 import Postspendientescount from '../../components/administration/users/Postspendientescount';
-import { aprovarPostPendiente, deletePostPendiente } from '../../redux/actions/postaproveAction';
+import { aprovarPostPendiente, getPostsPendientes } from '../../redux/actions/postaproveAction';
 import { useHistory } from 'react-router-dom';
-
+import { deletePost } from '../../redux/actions/postAction';
+ 
 let scroll = 0;
 
 const Postspendientes = () => {
@@ -38,11 +39,11 @@ const Postspendientes = () => {
   // Función para eliminar el post
   const handleDeletePost = (post) => {
     if (window.confirm("¿Realmente deseas eliminar este servicio?")) {
-      dispatch(deletePostPendiente({ post, auth, socket }));
+      dispatch(deletePost({ post, auth, socket }));
       history.push("/");
     }
   };
-
+ 
   // Función para editar el post
   const handleEditPost = (post) => {
     dispatch({ type: 'GLOBALTYPES.STATUS', payload: { ...post, onEdit: true } });

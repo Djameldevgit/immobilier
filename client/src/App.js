@@ -27,10 +27,11 @@ import SocketClient from './SocketClient'
 import { getNotifies } from './redux/actions/notifyAction'
 import statusCategoriesFormsImmobilier from './components/statusCategories/statusCategoriesImmobilier'
 import Annonces from './pages/annonces'
-import {     getPostsPendientes } from './redux/actions/categories/immobilier/vente';
+ 
 import { getPosts } from './redux/actions/postAction';
 import Postspendientes from './pages/administracion/postspendientes';
-  
+import { getPostsPendientesss } from './redux/actions/postaproveAction';
+   
 function App() {
   const { auth, status, modal, statusimmobilier } = useSelector(state => state)
   const statusImmobilier = statusimmobilier
@@ -46,7 +47,7 @@ function App() {
 
   useEffect(() => {
     if (auth.token) {
-      dispatch(getPostsPendientes(auth.token))
+      dispatch(getPostsPendientesss(auth.token))
       dispatch(getPosts(auth.token))
       dispatch(getSuggestions(auth.token))
       dispatch(getNotifies(auth.token))

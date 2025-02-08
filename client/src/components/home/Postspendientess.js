@@ -4,7 +4,7 @@ import LoadIcon from '../../images/loading.gif';
 import LoadMoreBtn from '../LoadMoreBtn';
 import { getDataAPI } from '../../utils/fetchData';
 import Carousel from '../Carousel';
-import { Link } from 'react-router-dom';
+ 
 import { POSTAPROVE_TYPES } from '../../redux/actions/postaproveAction';
 
 import CardHeaderaprove from './post_card/CardHeaderaprove';
@@ -33,10 +33,10 @@ const Postspendientess = () => {
 
   const handleLoadMore = async () => {
     setLoad(true);
-    const res = await getDataAPI(`getpostspendientes?limit=${homePostsAprove.page * 9}`, auth.token);
+    const res = await getDataAPI(`posts?limit=${homePostsAprove.page * 9}`, auth.token);
 
     dispatch({
-      type: POSTAPROVE_TYPES.APROVE_POST_PENDIENTE,
+      type: POSTAPROVE_TYPES.GET_POSTS_PENDIENTES,
       payload: { ...res.data, page: homePostsAprove.page + 1 },
     });
 

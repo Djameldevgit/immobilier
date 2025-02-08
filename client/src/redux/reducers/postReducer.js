@@ -1,7 +1,6 @@
- 
-import { POST_TYPES_VENTE } from '../actions/categories/immobilier/vente';
-import { EditData,DeleteData } from '../actions/globalTypes';
- 
+import { POST_TYPES } from '../actions/postAction'
+import { EditData, DeleteData } from '../actions/globalTypes'
+
 const initialState = {
     loading: false,
     posts: [],
@@ -10,30 +9,30 @@ const initialState = {
 }
 
 const postReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case POST_TYPES_VENTE.CREATE_POST:
+    switch (action.type){
+        case POST_TYPES.CREATE_POST:
             return {
                 ...state,
                 posts: [action.payload, ...state.posts]
             };
-        case POST_TYPES_VENTE.LOADING_POST:
+        case POST_TYPES.LOADING_POST:
             return {
                 ...state,
                 loading: action.payload
             };
-        case POST_TYPES_VENTE.GET_POSTS_VENTE:
+        case POST_TYPES.GET_POSTS:
             return {
                 ...state,
                 posts: action.payload.posts,
                 result: action.payload.result,
                 page: action.payload.page
             };
-        case POST_TYPES_VENTE.UPDATE_POST:
+        case POST_TYPES.UPDATE_POST:
             return {
                 ...state,
                 posts: EditData(state.posts, action.payload._id, action.payload)
             };
-        case POST_TYPES_VENTE.DELETE_POST:
+        case POST_TYPES.DELETE_POST:
             return {
                 ...state,
                 posts: DeleteData(state.posts, action.payload._id)

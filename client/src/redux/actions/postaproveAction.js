@@ -17,7 +17,7 @@ export const POSTAPROVE_TYPES = {
 }
 
 
-export const createPostpendiente = ({ postData ,wilaya, commune, marca, modelo,  images, auth, socket }) => async (dispatch) => {
+export const createPostPendiente = ({ postData ,wilaya, commune, marca, modelo,  images, auth, socket }) => async (dispatch) => {
     let media = []
  
     try {

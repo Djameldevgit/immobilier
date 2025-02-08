@@ -1,10 +1,7 @@
 import Carousel from '../../Carousel'
 import { Link, useHistory,useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import moment from 'moment';
-import 'moment/locale/fr'; // Importa el idioma francés
-
-
+import moment from 'moment'
 import { GLOBALTYPES } from '../../../redux/actions/globalTypes'
 import { deletePost } from '../../../redux/actions/postAction'
 import { BASE_URL } from '../../../utils/config'
@@ -13,7 +10,6 @@ import { BASE_URL } from '../../../utils/config'
 const CardPost = ({ post }) => {
   const { auth, socket } = useSelector(state => state)
   const dispatch = useDispatch()
-moment.locale('fr'); // Establece el idioma a francés
 
   const history = useHistory()
 
@@ -41,7 +37,7 @@ moment.locale('fr'); // Establece el idioma a francés
         <div className="cardheader-descripction">
           <div className='category'>{post.category}</div>
           <div className='subcategory'>{post.subCategory}</div>
-          <div className='title'> {post.title}</div>
+          <div className='title'>title{post.title}</div>
 
           <div className="nav-item dropdown">
             <div className="nav-item dropdown">

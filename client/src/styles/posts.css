@@ -1,198 +1,249 @@
- .header .imagelogo {
-     width: 70px;
-     height: 50px;
- }
+.cardcategory {
+    background-color: #192c6131;
+    width: 100%;
+    height: 100vh;
+}
 
- .posts {
-     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-     width: 100%;
+.cardcategory .formcategory {
+    background-color: rgb(207, 216, 253);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    justify-content: center;
+ align-items: center;
+    width: auto;
+    margin: 4px;
+    padding: 15px;
 
-     display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-     justify-content: center;
-     grid-gap: 10px;
-     overflow: hidden;
-     margin: 15px 0;
- }
+    border-radius: 7px;
+    cursor: pointer;
+}
 
- /* === 📌 Estilos generales de la tarjeta === */
- .cardpost {
-     background: #fff;
-     border-radius: 10px;
-     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-     overflow: hidden;
-     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+.cardcategory .formcategory div {
+    padding-bottom: 2px;
+    background-color: #a0c1ff;
+    margin: 2px;
+}
 
- }
+.cardcategory .formcategory div:hover {
 
- .cardpost:hover {
-     transform: translateY(-5px);
-     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
- }
+    background-color: #a8b2c5;
 
- /* === 🔹 Header de la tarjeta === */
- .cardheader {
-     padding: 15px;
-     border-bottom: 1px solid #eee;
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
- }
+}
 
- /* Contenedor de la descripción (categoría, subcategoría y título) */
- .cardheader-descripction {
-     display: flex;
-     align-items: center;
-     gap: 5px;
-     font-size: 14px;
-     flex: 1;
- }
+.cardcategory .formcategory .text {
+    font-weight: 700;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #002f86;
+}
 
- /* 🎨 Estilos del texto */
-  
- .category {
-        font-weight: bold;
-        text-transform: uppercase;
-         color: rgb(119, 27, 27);  
-        margin-right: 0px;
-     }
-     .subcategory {
-        font-weight: bold;
-          color: rgb(33, 146, 52);  
-      }
+.cardcategory .formcategory .text:hover {
+    color: #03112c;
+}
 
+.language-component {
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.language-component .dropdown-item {
+    background-color: #98e4fc;
+    padding: 4px 4px;
+    margin: 1px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+}
+
+.language-component .dropdown-item:hover {
+    background-color: #d7f0f7;
+    border: 1px solid rgb(0, 163, 163);
+
+}
+
+
+.header .imagelogo {
+    width: 70px;
+    height: 50px;
+}
+
+.posts {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    justify-content: center;
+    grid-gap: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+/* === 📌 Estilos generales de la tarjeta === */
+.cardpost {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+}
+
+.cardpost:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* === 🔹 Header de la tarjeta === */
+.cardheader {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Contenedor de la descripción (categoría, subcategoría y título) */
+.cardheader-descripction {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    flex: 1;
+}
+
+/* 🎨 Estilos del texto */
+.category,
+.subcategory,
 .title {
-     
-  color: rgb(150, 133, 37);
-   }
+    font-weight: bold;
+    color: #333;
+}
 
+/* === 🔘 Icono de opciones (tres puntos) === */
+.nav-item {
+    position: relative;
+    cursor: pointer;
+    margin-left: auto;
+}
 
- /* === 🔘 Icono de opciones (tres puntos) === */
- .nav-item {
-     position: relative;
-     cursor: pointer;
-     margin-left: auto;
- }
+.material-icons {
+    font-size: 22px;
+    color: #666;
+    transition: color 0.3s ease-in-out;
+}
 
- .material-icons {
-     font-size: 22px;
-     color: #666;
-     transition: color 0.3s ease-in-out;
- }
+/* 🖱️ Efecto hover en el icono */
+.nav-item:hover .material-icons {
+    color: #000;
+}
 
- /* 🖱️ Efecto hover en el icono */
- .nav-item:hover .material-icons {
-     color: #000;
- }
+/* === 📌 Menú desplegable === */
+.post-menu {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 2000;
+    min-width: 180px;
+    padding: 8px 0;
+    animation: fadeIn 0.2s ease-in-out;
+}
 
- /* === 📌 Menú desplegable === */
- .post-menu {
-     position: absolute;
-     top: 25px;
-     right: 0;
-     background: white;
-     border-radius: 8px;
-     border: 1px solid rgba(0, 0, 0, 0.1);
-     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-     display: none;
-     z-index: 2000;
-     min-width: 180px;
-     padding: 8px 0;
-     animation: fadeIn 0.2s ease-in-out;
- }
+/* 🖱️ Mostrar menú al pasar el cursor */
+.nav-item:hover .post-menu {
+    display: block;
+}
 
- /* 🖱️ Mostrar menú al pasar el cursor */
- .nav-item:hover .post-menu {
-     display: block;
- }
+/* ✨ Animación de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
 
- /* ✨ Animación de aparición */
- @keyframes fadeIn {
-     from {
-         opacity: 0;
-         transform: translateY(-5px);
-     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-     to {
-         opacity: 1;
-         transform: translateY(0);
-     }
- }
+/* 🔹 Opciones del menú */
+.post-menu .dropdown-item {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease-in-out;
+    cursor: pointer;
+}
 
- /* 🔹 Opciones del menú */
- .post-menu .dropdown-item {
-     padding: 10px 16px;
-     font-size: 14px;
-     color: #333;
-     display: flex;
-     align-items: center;
-     gap: 8px;
-     transition: background 0.2s ease-in-out;
-     cursor: pointer;
- }
+/* 🎨 Efecto hover en las opciones del menú */
+.post-menu .dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
 
- /* 🎨 Efecto hover en las opciones del menú */
- .post-menu .dropdown-item:hover {
-     background: rgba(0, 0, 0, 0.05);
-     border-radius: 4px;
- }
+/* === 🕒 Momento del post (ahora debajo del header) === */
+.card-moment {
+    padding: 5px 15px;
+}
 
- /* === 🕒 Momento del post (ahora debajo del header) === */
- .card-moment {
-     padding: 5px 15px;
-   margin-bottom: 5px;
- }
+.card-moment small {
+    font-size: 12px;
+    color: #888;
+}
 
- .card-moment small {
-     font-size: 12px;
-     color: rgb(66, 62, 62);
- }
+/* === 📷 Imagen del post === */
+.cardbody {
+    position: relative;
+    overflow: hidden;
+}
 
- /* === 📷 Imagen del post === */
- .cardbody {
-     position: relative;
-     overflow: hidden;
- }
+.imagecarousel {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    border-radius: 10px;
+}
 
- .imagecarousel {
-     width: 100%;
-     height: auto;
-     overflow: auto;
-     border-radius: 10px;
- }
+/* === 🔘 Botón "Voir détails" === */
+.btnpost {
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
 
- /* === 🔘 Botón "Voir détails" === */
- .btnpost {
-     padding: 15px;
-     text-align: center;
-     width: 100%;
- }
+.post-card__button {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
 
- .post-card__button {
-     background: #007bff;
-     color: white;
-     padding: 12px;
-     border: none;
-     border-radius: 5px;
-     cursor: pointer;
-     font-size: 14px;
-     width: 100%;
-     transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
- }
+/* 🖱️ Efecto hover en el botón */
+.post-card__button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
 
- /* 🖱️ Efecto hover en el botón */
- .post-card__button:hover {
-     background: #0056b3;
-     transform: scale(1.05);
- }
- 
- @media (width> 766px) {
-     .imagecarousel {
-         width: 100%;
-         height: 100%;
-         overflow: hidden;
+@media (width> 766px) {
+    .imagecarousel {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
 
-     }
+    }
 
- } 
+}
